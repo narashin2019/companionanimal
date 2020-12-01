@@ -20,7 +20,6 @@
       name, 
       email, 
       tel,
-      photo,
   </sql>
   
   <insert id="insert" parameterType="Member">
@@ -51,7 +50,8 @@
   <select id="findByNo" resultMap="MemberMap" parameterType="int">
     select 
       <include refid="select1"/>
-      pwd
+      pwd, 
+      photo
     from 
       lms_member
     where 
@@ -96,7 +96,8 @@
     parameterType="map">
     select 
       <include refid="select1"/>
-      pwd
+      pwd, 
+      photo
     from lms_member
     where 
       email=#{email} 

@@ -6,10 +6,10 @@
   version="4.0" metadata-complete="false">
 
   <description>
-    반려동물 커뮤니티
+    수업 관리 시스템
   </description>
 
-  <display-name>반려동물 커뮤니티</display-name>
+  <display-name>수업관리시스템</display-name>
   
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

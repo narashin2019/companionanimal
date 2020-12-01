@@ -236,6 +236,49 @@ values(
 100
 );
 
+INSERT INTO daily_board(
+daily_no,
+member_no, 
+daily_category,
+title,
+content,
+create_date,
+view_count,
+like_count
+) 
+values(
+2,
+2,
+'자랑글2',
+'우리몽구귀여움이 터지죠??',
+'졸귀탱이죠?',
+'2020-12-01',
+1223,
+99
+);
+
+
+INSERT INTO daily_board(
+daily_no,
+member_no, 
+daily_category,
+title,
+content,
+create_date,
+view_count,
+like_count
+) 
+values(
+3,
+3,
+'고민',
+'우리집 강아지가 밥을 안먹어요',
+'어떻하죠..??',
+'2020-12-03',
+123,
+100
+);
+
 -- 일상게시글 댓글 데이터
 INSERT INTO daily_reply(
 daily_reply_no,
@@ -252,16 +295,73 @@ values(
 '2020-12-01'
 );
 
+INSERT INTO daily_reply(
+daily_reply_no,
+content, 
+daily_no,
+member_no,
+create_date
+) 
+values(
+2,
+'어떻게 저렇게 이쁘게 생겼죠???',
+1,
+1,
+'2020-12-11'
+);
+
+INSERT INTO daily_reply(
+daily_reply_no,
+content, 
+daily_no,
+member_no,
+create_date
+) 
+values(
+3,
+'강아지 마음을 헤아려보려 하셨나요?',
+2,
+1,
+'2020-12-01'
+);
+
 -- 일상게시글 첨부파일 데이터
 INSERT INTO daily_file(
 file_no,
 daily_no,
 file_name,
-regdate,
+regdate
 ) 
 values(
 1,
 1,
 '우리멍멍이1.jpg',
-'2020-12-01',
+'2020-12-01'
+);
+
+INSERT INTO daily_file(
+file_no,
+daily_no,
+file_name,
+regdate
+) 
+values(
+2,
+2,
+'강아지사진입니다.jpg',
+'2020-12-11'
+);
+
+
+INSERT INTO daily_file(
+file_no,
+daily_no,
+file_name,
+regdate
+) 
+values(
+3,
+3,
+'a.jpg',
+'2020-12-01'
 );

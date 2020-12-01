@@ -195,7 +195,7 @@ file_name,
 regdate
 ) 
 values(
-1,
+2,
 2,
 '우리룰루.jpg',
 '2020-12-01'
@@ -208,7 +208,7 @@ file_name,
 regdate
 ) 
 values(
-1,
+3,
 3,
 '우리티모.jpg',
 '2020-12-01'

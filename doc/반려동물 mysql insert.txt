@@ -74,3 +74,55 @@ values(
 '2020-12-01'
 );
 
+
+-- 일상게시글 데이터
+INSERT INTO daily_board(
+daily_no,
+member_no, 
+daily_category,
+title,
+content,
+create_date,
+view_count,
+like_count
+) 
+values(
+1,
+1,
+'자랑',
+'우리나르보고가세요',
+'졸귀탱이죠?',
+'2020-12-01',
+123,
+100
+);
+
+-- 일상게시글 댓글 데이터
+INSERT INTO daily_reply(
+daily_reply_no,
+content, 
+daily_no,
+member_no,
+create_date
+) 
+values(
+1,
+'와 너무너무 귀여워요~~!',
+1,
+1,
+'2020-12-01'
+);
+
+-- 일상게시글 첨부파일 데이터
+INSERT INTO daily_file(
+file_no,
+daily_no,
+file_name,
+regdate,
+) 
+values(
+1,
+1,
+'우리멍멍이1.jpg',
+'2020-12-01',
+);

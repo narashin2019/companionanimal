@@ -13,7 +13,7 @@ values(
 1,
 'test@gmail.com',
 'test.jpg',
-password('1111')
+password('1111'),
 'test',
 '2020-12-01',
 '1111',
@@ -65,12 +65,12 @@ INSERT INTO walk_file (
 file_no,
 walk_no,
 file_name,
-regdate,
+regdate
 ) 
 values(
 1,
 1,
 '우리멍멍이.jpg',
-'2020-12-01',
+'2020-12-01'
 );
 

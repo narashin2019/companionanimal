@@ -14,11 +14,54 @@ values(
 'test@gmail.com',
 'test.jpg',
 password('1111'),
-'test',
+'곰비둘기',
 '2020-12-01',
 '1111',
 1
 );
+
+INSERT INTO member(
+member_no, 
+email,
+id_photo, 
+password,      
+nickname,
+create_date,
+userkey,
+loginmethod
+) 
+values(
+2,
+'test2@gmail.com',
+'test2.jpg',
+password('1111'),
+'슬롯수',
+'2020-12-01',
+'2222',
+1
+);
+
+INSERT INTO member(
+member_no, 
+email,
+id_photo, 
+password,      
+nickname,
+create_date,
+userkey,
+loginmethod
+) 
+values(
+3,
+'test3@gmail.com',
+'test3.jpg',
+password('1111'),
+'롤안함',
+'2020-12-01',
+'3333',
+1
+);
+
 
 -- 산책친구게시글 데이터
 INSERT INTO walk_board(
@@ -42,6 +85,48 @@ values(
 100
 );
 
+INSERT INTO walk_board(
+walk_no,
+member_no,
+walk_category,
+title,
+content,
+create_date,
+view_count,
+like_count 
+) 
+values(
+2,
+1,
+'카테고리',
+'아침 산책 멤버 구해요~',
+'아침에 올림픽공원 근처에서 산책하실분있나요 우리애는 2살이에요',
+'2020-12-01',
+100,
+100
+);
+
+INSERT INTO walk_board(
+walk_no,
+member_no,
+walk_category,
+title,
+content,
+create_date,
+view_count,
+like_count 
+) 
+values(
+3,
+1,
+'카테고리',
+'애견카페 같이 가실분',
+'저희 동네 애견카페 새로 생겼는데요~ ',
+'2020-12-01',
+100,
+100
+);
+
 -- 산책친구댓글 데이터
 INSERT INTO walk_reply (
 walk_reply_no,
@@ -58,6 +143,35 @@ values(
 '2020-12-01'
 );
 
+INSERT INTO walk_reply (
+walk_reply_no,
+content,
+walk_no,
+member_no,
+create_date
+) 
+values(
+2,
+'저요저요',
+2,
+1,
+'2020-12-01'
+);
+
+INSERT INTO walk_reply (
+walk_reply_no,
+content,
+walk_no,
+member_no,
+create_date
+) 
+values(
+3,
+'위치가 어딘가요?',
+3,
+1,
+'2020-12-01'
+);
 
 
 -- 산책친구첨부파일 데이터
@@ -74,6 +188,31 @@ values(
 '2020-12-01'
 );
 
+INSERT INTO walk_file (
+file_no,
+walk_no,
+file_name,
+regdate
+) 
+values(
+1,
+2,
+'우리룰루.jpg',
+'2020-12-01'
+);
+
+INSERT INTO walk_file (
+file_no,
+walk_no,
+file_name,
+regdate
+) 
+values(
+1,
+3,
+'우리티모.jpg',
+'2020-12-01'
+);
 
 -- 일상게시글 데이터
 INSERT INTO daily_board(

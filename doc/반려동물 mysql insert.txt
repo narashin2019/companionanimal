@@ -1,0 +1,76 @@
+-- 회원 데이터
+INSERT INTO member(
+member_no, 
+email,
+id_photo, 
+password,      
+nickname,
+create_date,
+userkey,
+loginmethod
+) 
+values(
+1,
+'test@gmail.com',
+'test.jpg',
+password('1111')
+'test',
+'2020-12-01',
+'1111',
+1
+);
+
+-- 산책친구게시글 데이터
+INSERT INTO walk_board(
+walk_no,
+member_no,
+walk_category,
+title,
+content,
+create_date,
+view_count,
+like_count 
+) 
+values(
+1,
+1,
+'카테고리',
+'석촌호수 밤산책 하실분',
+'석촌호수에서 8시쯤 우리 멍멍이 ',
+'2020-12-01',
+100,
+100
+);
+
+-- 산책친구댓글 데이터
+INSERT INTO walk_reply (
+walk_reply_no,
+content,
+walk_no,
+member_no,
+create_date
+) 
+values(
+1,
+'저도 할래요',
+1,
+1,
+'2020-12-01'
+);
+
+
+
+-- 산책친구첨부파일 데이터
+INSERT INTO walk_file (
+file_no,
+walk_no,
+file_name,
+regdate,
+) 
+values(
+1,
+1,
+'우리멍멍이.jpg',
+'2020-12-01',
+);
+

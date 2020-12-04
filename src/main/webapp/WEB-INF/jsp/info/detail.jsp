@@ -17,6 +17,7 @@
 <p>
 <a href='delete?infoNo=${info.infoNo}'>삭제</a> 
 <a href='updateForm?infoNo=${info.infoNo}'>변경</a>
+<a href="list.jsp">목록</a>
 </p>
 </c:if>
 

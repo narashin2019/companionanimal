@@ -14,7 +14,6 @@
     <th style="width: 10%">작성일</th>
     <th style="width: 5%">조회수</th>
     <th style="width: 5%">좋아요</th>
-    <th>
   </thead>
   <tbody>
     <c:forEach items="${list}" var="item">

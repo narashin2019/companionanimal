@@ -31,7 +31,7 @@ public class InfoController {
   @PostMapping("add")
   public String add(Info info) throws Exception {
     infoService.add(info);
-    return "redirect:list";
+    return "redirect:detail?infoNo=" + info.getInfoNo();
   }
 
   @GetMapping("delete")
@@ -50,21 +50,19 @@ public class InfoController {
 
   @GetMapping("list")
   public void list(Model model) throws Exception {
+    System.out.println("리스트 호출되었음");
     List<Info> infos = infoService.list();
     model.addAttribute("list", infos);
   }
 
   @GetMapping("updateForm")
   public void updateForm(int infoNo, Model model) throws Exception {
-    model.addAttribute("board", infoService.get(infoNo));
+    model.addAttribute("info", infoService.get(infoNo));
   }
 
   @PostMapping("update")
   public String update(Info info) throws Exception {
-    if (infoService.update(info) > 0) {
-      return "redirect:list";
-    } else {
-      throw new Exception("변경할 게시물 번호가 유효하지 않습니다.");
-    }
+    infoService.update(info);
+    return "redirect:list";
   }
 }

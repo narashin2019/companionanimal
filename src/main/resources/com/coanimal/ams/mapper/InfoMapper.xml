@@ -3,55 +3,83 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.eomcs.lms.dao.InfoDao">
+<mapper namespace="com.coanimal.ams.dao.InfoDao">
 
   <resultMap type="Info" id="InfoMap">
-    <id column="info_no"   property="no"/>
-    <result column="member_no"  property="title"/>
-    <result column="info_category"    property="date"/>
-    <result column="title" property="viewCount"/>
-    <result column="content" property="viewCount"/>
-    <result column="create_date" property="viewCount"/>
+    <id column="info_no" property="infoNo"/>
+    <result column="member_no" property="memberNo"/>
+    <result column="info_category" property="infoCategory"/>
+    <result column="title" property="title"/>
+    <result column="content" property="content"/>
+    <result column="create_date" property="createDate"/>
     <result column="view_count" property="viewCount"/>
-    <result column="like_count" property="viewCount"/>
+    <result column="like_count" property="likeCount"/>
+    <result column="nickname" property="nickname" />
   </resultMap>
   
-  <sql id="select1">
-    select 
-      board_id, 
-      conts, 
-      cdt, 
-      vw_cnt
-    from 
-      lms_board
-  </sql>
+
   
-  <select id="findAll" resultMap="BoardMap">
-    <include refid="select1"/>
-    order by 
-      board_id desc
+  <select id="findAll" resultMap="InfoMap" parameterType="Map">
+  SELECT
+      i.info_no,
+      i.info_category,
+      i.member_no,
+      m.nickname,
+      i.title,
+      i.content,
+      i.create_date,
+      i.view_count,
+      i.like_count
+    FROM
+      info_board AS i 
+    LEFT JOIN member AS m ON i.member_no=m.member_no
+    ORDER BY  
+      info_no desc
   </select>
   
-  <insert id="insert" parameterType="Board">
-    insert into lms_board(conts) 
-    values(#{title})
+ <insert id="insert" parameterType="Info" useGeneratedKeys="true" keyProperty="infoNo">
+    insert into info_board(
+      info_category,
+      title,
+      content
+      ) 
+    values(
+     #{infoCategory},
+     #{title},
+     #{content}
+    )
   </insert>
   
-  <select id="findByNo" resultMap="BoardMap" parameterType="int">
-    <include refid="select1"/>
-    where 
-      board_id=#{no}
+  <select id="findByNo" resultMap="InfoMap" parameterType="int">
+  SELECT
+      i.info_no,
+      i.info_category,
+      m.nickname,
+      i.title,
+      i.content,
+      i.create_date,
+      i.view_count,
+      i.like_count
+    FROM
+      info_board AS i 
+    LEFT JOIN member AS m ON i.member_no=m.member_no
+    WHERE
+      i.info_no=#{infoNo}
   </select>
   
-  <update id="update" parameterType="Board">
-    update lms_board set
-      conts=#{title}
-    where board_id=#{no}
+  <update id="update" parameterType="Info">
+    update info_board 
+    set
+      info_category=#{infoCategory},
+      title=#{title},
+      content=#{content}
+    where 
+      info_no=#{infoNo}
   </update>
   
   <delete id="delete" parameterType="int">
-    delete from lms_board
-    where board_id=#{no}
+    delete from info_board
+    where info_no=#{infoNo}
   </delete>
 </mapper>
 

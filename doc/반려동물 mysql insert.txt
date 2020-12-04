@@ -365,3 +365,159 @@ values(
 'a.jpg',
 '2020-12-01'
 );
+
+
+-- 정보공유게시글
+INSERT INTO info_board (
+  info_no,
+  member_no,
+  info_category,
+  title,
+  content,
+  create_date,
+  view_count,
+  like_count
+)
+values
+(
+1,
+1,
+'정보',
+'애견미용 할인 하네요~',
+'신림역 애견미용 오픈기념 할인한데요',
+'2020-12-02',
+50,
+50
+);
+
+INSERT INTO info_board (
+  info_no,
+  member_no,
+  info_category,
+  title,
+  content,
+  create_date,
+  view_count,
+  like_count
+)
+values
+(
+2,
+1,
+'공구',
+'집사님들 냥이이불 공구해요!',
+'수면 이불이랍니다',
+'2020-12-02',
+50,
+50
+);
+
+INSERT INTO info_board (
+  info_no,
+  member_no,
+  info_category,
+  title,
+  content,
+  create_date,
+  view_count,
+  like_count
+)
+values
+(
+3,
+1,
+'공구',
+'츄르 공구해요!',
+'우리애가 환장합니다',
+'2020-12-02',
+50,
+50
+);
+
+-- 정보공유 댓글 데이터
+INSERT INTO info_reply(
+info_reply_no,
+content, 
+info_no,
+member_no,
+create_date
+) 
+values(
+1,
+'와 좋은정보 감사합니다',
+1,
+1,
+'2020-12-01'
+);
+
+INSERT INTO info_reply(
+info_reply_no,
+content, 
+info_no,
+member_no,
+create_date
+) 
+values(
+2,
+'오 대박',
+1,
+1,
+'2020-12-11'
+);
+
+INSERT INTO info_reply(
+info_reply_no,
+content, 
+info_no,
+member_no,
+create_date
+) 
+values(
+3,
+'굿굿',
+2,
+1,
+'2020-12-01'
+);
+
+
+-- 정보공유게시글 첨부파일 데이터
+INSERT INTO info_file(
+file_no,
+info_no,
+file_name,
+regdate
+) 
+values(
+1,
+1,
+'a.jpg',
+'2020-12-01'
+);
+
+INSERT INTO info_file(
+file_no,
+info_no,
+file_name,
+regdate
+) 
+values(
+2,
+2,
+'b.jpg',
+'2020-12-11'
+);
+
+
+INSERT INTO info_file(
+file_no,
+info_no,
+file_name,
+regdate
+) 
+values(
+3,
+3,
+'c.jpg',
+'2020-12-01'
+);

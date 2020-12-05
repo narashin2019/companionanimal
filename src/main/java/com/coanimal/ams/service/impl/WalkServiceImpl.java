@@ -2,29 +2,34 @@ package com.coanimal.ams.service.impl;
 
 import java.util.List;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionTemplate;
 import com.coanimal.ams.dao.WalkDao;
+import com.coanimal.ams.domain.Criteria;
 import com.coanimal.ams.domain.Walk;
 import com.coanimal.ams.service.WalkService;
 
 @Component
 public class WalkServiceImpl implements WalkService {
 
+  TransactionTemplate transactionTemplate;
   WalkDao walkDao;
 
-
-
-  public WalkServiceImpl(WalkDao walkDao) {
+  public WalkServiceImpl(PlatformTransactionManager txManager, WalkDao walkDao) {
+    this.transactionTemplate = new TransactionTemplate(txManager);
     this.walkDao = walkDao;
   }
 
+  @Transactional
   @Override
   public void add(Walk walk) throws Exception {
     walkDao.insert(walk);
   }
 
   @Override
-  public List<Walk> list() throws Exception {
-    return walkDao.findAll();
+  public List<Walk> list(Criteria cri) throws Exception {
+    return walkDao.findAll(cri);
   }
 
   @Override
@@ -40,6 +45,18 @@ public class WalkServiceImpl implements WalkService {
   @Override
   public Walk get(int walkNo) throws Exception {
     return walkDao.findByNo(walkNo);
+  }
+
+  @Override
+  public List<Walk> search(String keyword) throws Exception {
+    return walkDao.findByKeyword(keyword);
+  }
+
+
+  // 게시물 총 개수 구하기
+  @Override
+  public int countWalkListTotal() throws Exception {
+    return walkDao.countWalkList();
   }
 
 }

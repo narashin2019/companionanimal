@@ -34,8 +34,8 @@ FROM
   walk_board AS w 
 LEFT JOIN member AS m ON w.member_no=m.member_no
 ORDER BY  
-  walk_no desc
-
+  w.walk_no desc
+   LIMIT #{pageStart}, #{perPageNum}
   </select>
   
  <insert id="insert" parameterType="Walk" useGeneratedKeys="true" keyProperty="walkNo">
@@ -82,11 +82,37 @@ ORDER BY
     delete from walk_board
     where walk_no=#{walkNo}
   </delete>
-</mapper>
+
+
+  <select id="findByKeyword" resultMap="WalkMap" parameterType="string">
+    <bind name="keywordPattern" value="'%' + _parameter + '%'" />
+     SELECT
+      w.walk_no,
+      w.walk_category,
+      m.nickname,
+      w.title,
+      w.content,
+      w.create_date,
+      w.view_count,
+      w.like_count
+    FROM
+      walk_board AS w 
+    LEFT JOIN member AS m ON i.member_no=m.member_no
+    WHERE
+      title like #{keywordPattern}
+      or content like #{keywordPattern}
+    order by 
+      w.walk_no desc 
+  </select>
 
 
 
-
-
-
-
+<!-- 총 게시물 개수 구하기 -->
+  <select id="countWalkList" resultType="Integer">
+        SELECT
+            count(*)
+        FROM
+            walk_board
+  </select>
+  
+  </mapper>

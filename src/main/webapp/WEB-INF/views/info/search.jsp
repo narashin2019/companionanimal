@@ -27,7 +27,12 @@
       <td>${item.likeCount}</td>
     </tr>
     </c:forEach>
-  
   </tbody>
-  
   </table>
+  
+  <div>
+  <form action='search' method='get'>
+        검색어: <input name='keyword' type='text'>
+     <button>검색</button>
+  </form>
+  </div>

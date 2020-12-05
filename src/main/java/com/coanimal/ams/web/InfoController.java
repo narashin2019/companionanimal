@@ -1,6 +1,5 @@
 package com.coanimal.ams.web;
 
-import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import com.coanimal.ams.domain.Criteria;
 import com.coanimal.ams.domain.Info;
+import com.coanimal.ams.domain.PageMaker;
 import com.coanimal.ams.service.InfoService;
 
 @Controller
@@ -49,10 +50,15 @@ public class InfoController {
   }
 
   @GetMapping("list")
-  public void list(Model model) throws Exception {
-    System.out.println("리스트 호출되었음");
-    List<Info> infos = infoService.list();
-    model.addAttribute("list", infos);
+  public void list(Model model, Criteria cri) throws Exception {
+
+    model.addAttribute("list", infoService.list(cri));
+    
+    PageMaker pageMaker = new PageMaker();
+    pageMaker.setCri(cri);
+    pageMaker.setTotalCount(infoService.countInfoListTotal());
+    
+    model.addAttribute("pageMaker", pageMaker);
   }
 
   @GetMapping("updateForm")
@@ -62,7 +68,17 @@ public class InfoController {
 
   @PostMapping("update")
   public String update(Info info) throws Exception {
-    infoService.update(info);
-    return "redirect:list";
+    
+    logger.info("update");
+   
+    infoService.update(info); 
+    return "redirect:detail?infoNo=" + info.getInfoNo();
   }
+  
+  @GetMapping("search")
+  public void search(String keyword, Model model) throws Exception {
+    model.addAttribute("list", infoService.search(keyword));
+  }
+
+  
 }

@@ -2,17 +2,28 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
 
-<h1>게시물 변경(JSP + EL + JSTL)</h1>
+<h1>정보/공구 게시판</h1>
 
-<form action='update' method='post'>
-번호: ${board.no}<br>
-<%-- 
-번호: <input name='no' readonly type='text' value='${board.no}'><br>
---%>
-<input name='no' type='hidden' value='${board.no}'>
+<form action='update' method='post' >
+번호: ${info.infoNo}<br>
+<input name='infoNo' type='hidden' value='${info.infoNo}'>
+
+<div>
+    카테고리:
+    <select name="infoCategory">
+      <option value="정보">정보</option>
+      <option value="공구">공구</option>
+    </select>
+</div>
+
+<div>
+제목: <input name='title' type='text' value='${info.title}'><br>
+
 내용:<br>
-<textarea name='title' rows='5' cols='60'>${board.title}</textarea><br>
-등록일: ${board.date}<br>
-조회수: ${board.viewCount}<br>
+<textarea name='content' rows='5' cols='60'>${info.content}</textarea><br>
+</div>
+
+
 <button>변경</button>
+
 </form>

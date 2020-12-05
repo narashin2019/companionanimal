@@ -10,10 +10,33 @@
   <title>정보/공구게시판</title>
   </head>
 
-  <body>
-  <section id="container">
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var formObj = $("form[name='addForm']");
+      $(".write_btn").on("click", function(){
+        if(fn_valiChk()){
+          return false;
+        }
+        formObj.attr("action", "add");
+        formObj.attr("method", "post");
+        formObj.submit();
+      });
+    })
+    function fn_valiChk(){
+      var regForm = $("form[name='addForm'] .chk").length;
+      for(var i = 0; i<regForm; i++){
+        if($(".chk").eq(i).val() == "" || $(".chk").eq(i).val() == null){
+          alert($(".chk").eq(i).attr("title"));
+          return true;
+        }
+      }
+    }
+  </script>
+
+<body>
+<section id="container">
   
-<form action='add' method='post'>
+<form name='addForm' action='add' method='post'>
 
 <div>
     카테고리:
@@ -22,11 +45,13 @@
       <option value="공구">공구</option>
     </select>
 </div>
-제목: <input name='title' type='text'><br>
-내용:<br>
-<textarea name='content' rows='5' cols='60'></textarea><br>
 
-<button>등록</button>
+<label for='title'>제목:</label><input type="text" id="title" name="title" class="chk" title="제목을 입력하세요"><br>
+
+<label for='content'>내용:</label><br>
+<textarea id="content" name="content" class="chk" title="내용을 입력하세요" rows='5' cols='60'></textarea><br>
+
+<button class="write_btn" type="submit">등록</button>
 
 </form>
 

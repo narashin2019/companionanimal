@@ -84,7 +84,7 @@ public class PageMaker {
         + displayPageNum + "]";
   }
   
-  
+  // 페이지 쿼리 만드는 메소드
   public String makeQuery(int page) {
     UriComponents uri = UriComponentsBuilder.newInstance()
             .queryParam("page", page)
@@ -102,7 +102,7 @@ public class PageMaker {
     return uri.toUriString();
   }
 
-
+  // 리스트 + 검색 + 페이징
   public String makeSearch(int page) {
     UriComponents uriComponents =
               UriComponentsBuilder.newInstance()

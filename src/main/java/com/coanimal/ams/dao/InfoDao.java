@@ -1,7 +1,6 @@
 package com.coanimal.ams.dao;
 
 import java.util.List;
-import com.coanimal.ams.domain.Criteria;
 import com.coanimal.ams.domain.Info;
 import com.coanimal.ams.domain.SearchCriteria;
 
@@ -12,7 +11,11 @@ import com.coanimal.ams.domain.SearchCriteria;
 public interface InfoDao {
   public int insert(Info info) throws Exception;
 
+  // 리스트 + 검색 + 페이징
   public List<Info> findAll(SearchCriteria scri) throws Exception;
+  
+  // 리스트 + 검색 + 페이징 (총 게시글 갯수 구하기)
+  public int countInfoList(SearchCriteria scri) throws Exception;
 
   public Info findByNo(int infoNo) throws Exception;
 
@@ -20,11 +23,9 @@ public interface InfoDao {
 
   public int delete(int infoNo) throws Exception;
   
-  //키워드 검색
-  public List<Info> findByKeyword(String keyword) throws Exception;
+  //public List<Info> findByKeyword(String keyword) throws Exception;
   
-  //총 게시글 갯수 구하기
-  public int countInfoList(SearchCriteria scri) throws Exception;
+
 
 }
 

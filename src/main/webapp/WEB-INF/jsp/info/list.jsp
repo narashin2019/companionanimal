@@ -16,7 +16,8 @@
 
   <body>
   <section id="container">
-<form role="form" method="get">
+  
+  <form role="form" method="get">
 
 <div>
   <table border='1'>
@@ -30,15 +31,15 @@
     <th style="width: 5%">좋아요</th>
   </thead>
   <tbody>
-    <c:forEach items="${list}" var="item">
+    <c:forEach items="${list}" var="list">
     <tr>
-      <td>${item.infoNo}</td>
-      <td>${item.infoCategory}</td>
-      <td><a href='detail?infoNo=${item.infoNo}'> ${item.title}</a></td>
-      <td>${item.nickname}</td>
-      <td>${item.createDate}</td>
-      <td><c:out value="${item.viewCount}"/></td>
-      <td>${item.likeCount}</td>
+      <td>${list.infoNo}</td>
+      <td>${list.infoCategory}</td>
+      <td><a href="detail?infoNo=${list.infoNo}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}"><c:out value="${list.title}" /></a></td>
+      <td>${list.nickname}</td>
+      <td>${list.createDate}</td>
+      <td><c:out value="${list.viewCount}"/></td>
+      <td>${list.likeCount}</td>
     </tr>
     </c:forEach>
   </tbody>

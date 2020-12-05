@@ -6,7 +6,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 import com.coanimal.ams.dao.InfoDao;
-import com.coanimal.ams.domain.Criteria;
 import com.coanimal.ams.domain.Info;
 import com.coanimal.ams.domain.SearchCriteria;
 import com.coanimal.ams.service.InfoService;
@@ -28,19 +27,25 @@ public class InfoServiceImpl implements InfoService {
     infoDao.insert(info);
   }
 
+  // 리스트 + 검색 + 페이징
   @Override
   public List<Info> list(SearchCriteria scri) throws Exception {
     return infoDao.findAll(scri);
   }
-
-  @Override
-  public int delete(int infoNo) throws Exception {
-    return infoDao.delete(infoNo);
+  
+  // 리스트 + 검색 + 페이징 (게시물 총 개수 구하기)
+  public int countInfoListTotal(SearchCriteria scri) throws Exception {
+    return infoDao.countInfoList(scri);
   }
 
   @Override
-  public int update(Info info) throws Exception {
-    return infoDao.update(info);
+  public void delete(int infoNo) throws Exception {
+    infoDao.delete(infoNo);
+  }
+
+  @Override
+  public void update(Info info) throws Exception {
+    infoDao.update(info);
   }
 
   @Override
@@ -48,15 +53,12 @@ public class InfoServiceImpl implements InfoService {
     return infoDao.findByNo(infoNo);
   }
 
-  // 게시물 총 개수 구하기
-  public int countInfoListTotal(SearchCriteria scri) throws Exception {
-    return infoDao.countInfoList(scri);
-  }
 
-  @Override
-  public List<Info> search(String keyword) throws Exception {
-    return infoDao.findByKeyword(keyword);
-  }
+
+//  @Override
+//  public List<Info> search(String keyword) throws Exception {
+//    return infoDao.findByKeyword(keyword);
+//  }
 
 
 }

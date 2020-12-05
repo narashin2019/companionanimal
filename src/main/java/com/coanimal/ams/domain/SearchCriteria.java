@@ -1,5 +1,6 @@
 package com.coanimal.ams.domain;
 
+// 리스트 + 검색 + 페이징
 public class SearchCriteria extends Criteria{
 
   private String searchType = "";

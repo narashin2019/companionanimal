@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.coanimal.ams.domain.Criteria;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.coanimal.ams.domain.Info;
 import com.coanimal.ams.domain.PageMaker;
 import com.coanimal.ams.domain.SearchCriteria;
@@ -28,34 +28,35 @@ public class InfoController {
     logger.debug("InfoController 생성됨!");
   }
 
+  // 게시글 추가 폼
   @GetMapping("form")
   public void form() throws Exception {}
 
+  // 게시글 추가
   @PostMapping("add")
   public String add(Info info) throws Exception {
     infoService.add(info);
     return "redirect:detail?infoNo=" + info.getInfoNo();
   }
 
+  // 게시글 삭제
   @GetMapping("delete")
-  public String delete(int infoNo) throws Exception {
-    if (infoService.delete(infoNo) > 0) {
-      return "redirect:list";
-    } else {
-      throw new Exception("삭제할 게시물 번호가 유효하지 않습니다.");
-    }
+  public String delete(int infoNo, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr) throws Exception {
+    infoService.delete(infoNo);
+    
+    rttr.addAttribute("page", scri.getPage());
+    rttr.addAttribute("perPageNum", scri.getPerPageNum());
+    rttr.addAttribute("searchType", scri.getSearchType());
+    rttr.addAttribute("keyword", scri.getKeyword());
+    
+    return "redirect:list";
   }
 
+  // 게시글 상세보기
   @GetMapping("detail")
-  public void detail(int infoNo, Model model, Criteria cri) throws Exception {
-    model.addAttribute("info", infoService.get(infoNo));
-    
-    PageMaker pageMaker = new PageMaker();
-    pageMaker.setCri(cri);
-    
-    model.addAttribute("page", cri.getPage());
-    model.addAttribute("PageMaker", pageMaker);
-
+  public void detail(int infoNo, Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
+    model.addAttribute("detail", infoService.get(infoNo));
+    model.addAttribute("scri", scri);
   }
 
   // 리스트 + 페이징
@@ -71,24 +72,33 @@ public class InfoController {
     model.addAttribute("pageMaker", pageMaker); // 게시판 하단의 페이징 관련, 이전페이지, 페이지 링크 , 다음 페이지
   }
 
+  // 게시글 수정 폼
   @GetMapping("updateForm")
-  public void updateForm(int infoNo, Model model) throws Exception {
-    model.addAttribute("info", infoService.get(infoNo));
+  public void updateForm(int infoNo, Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
+    model.addAttribute("update", infoService.get(infoNo));
+    model.addAttribute("scri", scri);
   }
 
+  // 게시글 수정
   @PostMapping("update")
-  public String update(Info info) throws Exception {
+  public String update(Info info, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr) throws Exception {
     
     logger.info("update");
    
     infoService.update(info); 
+    
+    rttr.addAttribute("page", scri.getPage());
+    rttr.addAttribute("perPageNum", scri.getPerPageNum());
+    rttr.addAttribute("searchType", scri.getSearchType());
+    rttr.addAttribute("keyword", scri.getKeyword());
+    
     return "redirect:detail?infoNo=" + info.getInfoNo();
   }
   
-  @GetMapping("search")
-  public void search(String keyword, Model model) throws Exception {
-    model.addAttribute("list", infoService.search(keyword));
-  }
+//  @GetMapping("search")
+//  public void search(String keyword, Model model) throws Exception {
+//    model.addAttribute("list", infoService.search(keyword));
+//  }
 
   
 }

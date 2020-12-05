@@ -2,11 +2,18 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
 
-<h1>산책 게시판</h1>
-
-<form name="updateForm" role="form" action='update' method='post'>
+<html>
+  <head>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <title>산책 게시판</title>
+  </head>
+<body>
+  <section id="container">
+  
+<form action='update' method='post' >
 번호: ${walk.walkNo}<br>
 <input name='walkNo' type='hidden' value='${walk.walkNo}'>
+
 <div>
     카테고리:
     <select name="walkCategory">
@@ -26,3 +33,7 @@
 <button>변경</button>
 
 </form>
+</section>
+</body>
+</html>
+

@@ -1,6 +1,5 @@
 package com.coanimal.ams.web;
 
-import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import com.coanimal.ams.domain.Criteria;
+import com.coanimal.ams.domain.PageMaker;
 import com.coanimal.ams.domain.Walk;
 import com.coanimal.ams.service.WalkService;
 
@@ -49,10 +50,15 @@ public class WalkController {
   }
 
   @GetMapping("list")
-  public void list(Model model) throws Exception {
-    System.out.println("리스트 호출되었음");
-    List<Walk> walks = walkService.list();
-    model.addAttribute("list", walks);
+  public void list(Model model, Criteria cri) throws Exception {
+
+    model.addAttribute("list", walkService.list(cri));
+
+    PageMaker pageMaker = new PageMaker();
+    pageMaker.setCri(cri);
+    pageMaker.setTotalCount(walkService.countWalkListTotal());
+
+    model.addAttribute("pageMaker", pageMaker);
   }
 
   @GetMapping("updateForm")
@@ -64,5 +70,10 @@ public class WalkController {
   public String update(Walk walk) throws Exception {
     walkService.update(walk);
     return "redirect:list";
+  }
+
+  @GetMapping("search")
+  public void search(String keyword, Model model) throws Exception {
+    model.addAttribute("list", walkService.search(keyword));
   }
 }

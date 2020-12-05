@@ -17,6 +17,10 @@ public interface InfoDao {
   public int update(Info info) throws Exception;
 
   public int delete(int infoNo) throws Exception;
+  
+  //키워드 검색
+  public List<Info> findByKeyword(String keyword) throws Exception;
+
 }
 
 

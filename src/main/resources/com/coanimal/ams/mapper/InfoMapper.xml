@@ -23,7 +23,6 @@
   SELECT
       i.info_no,
       i.info_category,
-      i.member_no,
       m.nickname,
       i.title,
       i.content,
@@ -34,7 +33,7 @@
       info_board AS i 
     LEFT JOIN member AS m ON i.member_no=m.member_no
     ORDER BY  
-      info_no desc
+      i.info_no desc
   </select>
   
  <insert id="insert" parameterType="Info" useGeneratedKeys="true" keyProperty="infoNo">
@@ -81,6 +80,30 @@
     delete from info_board
     where info_no=#{infoNo}
   </delete>
+  
+  <select id="findByKeyword" resultMap="InfoMap" parameterType="string">
+    <bind name="keywordPattern" value="'%' + _parameter + '%'" />
+     SELECT
+      i.info_no,
+      i.info_category,
+      m.nickname,
+      i.title,
+      i.content,
+      i.create_date,
+      i.view_count,
+      i.like_count
+    FROM
+      info_board AS i 
+    LEFT JOIN member AS m ON i.member_no=m.member_no
+    WHERE
+      title like #{keywordPattern}
+      or content like #{keywordPattern}
+    order by 
+      i.info_no desc 
+  </select>
+
+  
+  
 </mapper>
 
 

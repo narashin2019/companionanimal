@@ -14,4 +14,8 @@ public interface InfoService {
   Info get(int infoNo) throws Exception;
 
   int update(Info info) throws Exception;
+  
+  // 키워드 검색
+  List<Info> search(String keyword) throws Exception;
+
 }

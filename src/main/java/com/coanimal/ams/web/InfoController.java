@@ -65,7 +65,13 @@ public class InfoController {
     logger.info("update");
    
     infoService.update(info); 
-    
     return "redirect:detail?infoNo=" + info.getInfoNo();
   }
+  
+  @GetMapping("search")
+  public void search(String keyword, Model model) throws Exception {
+    model.addAttribute("list", infoService.search(keyword));
+  }
+
+  
 }

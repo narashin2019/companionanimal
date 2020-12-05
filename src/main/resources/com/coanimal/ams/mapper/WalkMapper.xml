@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.coanimal.ams.dao.WalkDao">
+
+  <resultMap type="Walk" id="WalkMap">
+    <id column="walk_no" property="walkNo"/>
+    <result column="member_no" property="memberNo"/>
+    <result column="walk_category" property="walkCategory"/>
+    <result column="title" property="title"/>
+    <result column="content" property="content"/>
+    <result column="create_date" property="createDate"/>
+    <result column="view_count" property="viewCount"/>
+    <result column="like_count" property="likeCount"/>
+    <result column="nickname" property="nickname" />
+  </resultMap>
+  
+
+  
+  <select id="findAll" resultMap="WalkMap" parameterType="Map">
+  SELECT
+  w.walk_no,
+  w.walk_category,
+  w.member_no,
+  m.nickname,
+  w.title,
+  w.content,
+  w.create_date,
+  w.view_count,
+  w.like_count
+FROM
+  walk_board AS w 
+LEFT JOIN member AS m ON w.member_no=m.member_no
+ORDER BY  
+  walk_no desc
+
+  </select>
+  
+ <insert id="insert" parameterType="Walk" useGeneratedKeys="true" keyProperty="walkNo">
+    insert into walk_board(
+    walk_category,
+      title,
+      content
+      ) 
+    values(
+     #{walkCategory},
+     #{title},
+     #{content}
+    )
+  </insert>
+  
+  <select id="findByNo" resultMap="WalkMap" parameterType="int">
+  SELECT
+      w.walk_no,
+      w.walk_category,
+      m.nickname,
+      w.title,
+      w.content,
+      w.create_date,
+      w.view_count,
+      w.like_count
+    FROM
+      walk_board AS w 
+    LEFT JOIN member AS m ON w.member_no=m.member_no
+    WHERE
+      w.walk_no=#{walkNo}
+  </select>
+  
+  <update id="update" parameterType="Walk">
+    update walk_board 
+    set
+      walk_category=#{walkCategory},
+      title=#{title},
+      content=#{content}
+    where 
+      walk_no=#{walkNo}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from walk_board
+    where walk_no=#{walkNo}
+  </delete>
+</mapper>
+
+
+
+
+
+
+

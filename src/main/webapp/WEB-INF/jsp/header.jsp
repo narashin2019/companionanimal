@@ -34,7 +34,7 @@ div.container {
       <a class='nav-link' href='../board/list'>게시글</span></a>
     </li>
     <li class='nav-item'>
-      <a class='nav-link' href='../lesson/list'>수업</a>
+      <a class='nav-link' href='../lesson/list'>산책게시판</a>
     </li>
     <li class='nav-item'>
       <a class='nav-link' href='../member/list'>회원</a>

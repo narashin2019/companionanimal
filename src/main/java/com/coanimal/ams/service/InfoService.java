@@ -14,4 +14,6 @@ public interface InfoService {
   Info get(int infoNo) throws Exception;
 
   int update(Info info) throws Exception;
+
+
 }

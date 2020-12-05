@@ -1,13 +1,14 @@
 package com.coanimal.ams.service;
 
 import java.util.List;
+import com.coanimal.ams.domain.Criteria;
 import com.coanimal.ams.domain.Info;
 
 public interface InfoService {
 
   void add(Info info) throws Exception;
 
-  List<Info> list() throws Exception;
+  List<Info> list(Criteria cri) throws Exception;
 
   int delete(int infoNo) throws Exception;
 
@@ -18,4 +19,6 @@ public interface InfoService {
   // 키워드 검색
   List<Info> search(String keyword) throws Exception;
 
+  // 게시물 총 개수 구하기
+  int countInfoListTotal() throws Exception;
 }

@@ -34,6 +34,7 @@
     LEFT JOIN member AS m ON i.member_no=m.member_no
     ORDER BY  
       i.info_no desc
+    LIMIT #{pageStart}, #{perPageNum}
   </select>
   
  <insert id="insert" parameterType="Info" useGeneratedKeys="true" keyProperty="infoNo">
@@ -102,7 +103,16 @@
       i.info_no desc 
   </select>
 
-  
+
+<!-- 총 게시물 개수 구하기 -->
+  <select id="countInfoList" resultType="Integer">
+        SELECT
+            count(*)
+        FROM
+            info_board
+  </select>
+
+
   
 </mapper>
 

@@ -6,6 +6,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 import com.coanimal.ams.dao.InfoDao;
+import com.coanimal.ams.domain.Criteria;
 import com.coanimal.ams.domain.Info;
 import com.coanimal.ams.service.InfoService;
 
@@ -27,8 +28,8 @@ public class InfoServiceImpl implements InfoService {
   }
 
   @Override
-  public List<Info> list() throws Exception {
-    return infoDao.findAll();
+  public List<Info> list(Criteria cri) throws Exception {
+    return infoDao.findAll(cri);
   }
 
   @Override
@@ -49,6 +50,11 @@ public class InfoServiceImpl implements InfoService {
   @Override
   public List<Info> search(String keyword) throws Exception {
     return infoDao.findByKeyword(keyword);
+  }
+  
+  // 게시물 총 개수 구하기
+  public int countInfoListTotal() throws Exception {
+    return infoDao.countInfoList();
   }
 
 

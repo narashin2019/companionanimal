@@ -11,8 +11,6 @@ public class InfoServiceImpl implements InfoService {
 
   InfoDao infoDao;
   
-
-
   public InfoServiceImpl(InfoDao infoDao) {
     this.infoDao = infoDao;
   }

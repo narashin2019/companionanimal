@@ -4,8 +4,10 @@
 
 <h1>정보/공구 게시판</h1>
 
-<form name="updateForm" role="form" action='update' method='post'>
+<form action='update' method='post' >
 번호: ${info.infoNo}<br>
+<input name='infoNo' type='hidden' value='${info.infoNo}'>
+
 <div>
     카테고리:
     <select name="infoCategory">

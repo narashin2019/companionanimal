@@ -50,7 +50,6 @@ public class InfoController {
 
   @GetMapping("list")
   public void list(Model model) throws Exception {
-    System.out.println("리스트 호출되었음");
     List<Info> infos = infoService.list();
     model.addAttribute("list", infos);
   }
@@ -62,7 +61,11 @@ public class InfoController {
 
   @PostMapping("update")
   public String update(Info info) throws Exception {
-    infoService.update(info);
-    return "redirect:list";
+    
+    logger.info("update");
+   
+    infoService.update(info); 
+    
+    return "redirect:detail?infoNo=" + info.getInfoNo();
   }
 }

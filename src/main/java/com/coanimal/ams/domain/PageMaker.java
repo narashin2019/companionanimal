@@ -1,14 +1,19 @@
 package com.coanimal.ams.domain;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
 public class PageMaker {
   
-  private Criteria cri;
-  private int totalCount;
-  private int startPage;
-  private int endPage;
-  private boolean prev;
-  private boolean next;
-  private int displayPageNum = 5;
+  private Criteria cri; // 앞서 생성한 Criteria를 주입받는다.
+  private int totalCount; // 게시판 전체 데이터 개수
+  private int startPage; // 현재 화면에서 보이는 startPage 번호
+  private int endPage; // 현재 화면에 보이는 endPage 번호
+  private boolean prev; // 페이징 이전 버튼 활성화 여부
+  private boolean next; // 페이징 다음 버튼 활서화 여부
+  private int displayPageNum = 10; // 게시판 화면에서 한번에 보여질 페이지 번호의 개수 ( 1,2,3,4,5,6,7,9,10)
   
   public Criteria getCri() {
       return cri;
@@ -70,6 +75,55 @@ public class PageMaker {
   }
   public void setDisplayPageNum(int displayPageNum) {
       this.displayPageNum = displayPageNum;
+  }
+  
+  @Override
+  public String toString() {
+    return "PageMaker [cri=" + cri + ", totalCount=" + totalCount + ", startPage=" + startPage
+        + ", endPage=" + endPage + ", prev=" + prev + ", next=" + next + ", displayPageNum="
+        + displayPageNum + "]";
+  }
+  
+  
+  public String makeQuery(int page) {
+    UriComponents uri = UriComponentsBuilder.newInstance()
+            .queryParam("page", page)
+            .queryParam("perPageNum", cri.getPerPageNum())
+            .build();
+    return uri.toUriString();
+  }
+
+  public String makeQuery(int idx, int page) {
+    UriComponents uri = UriComponentsBuilder.newInstance()
+            .queryParam("idx", idx)
+            .queryParam("page", page)
+            .queryParam("perPageNum", cri.getPerPageNum())
+            .build();
+    return uri.toUriString();
+  }
+
+
+  public String makeSearch(int page) {
+    UriComponents uriComponents =
+              UriComponentsBuilder.newInstance()
+              .queryParam("page", page)
+              .queryParam("perPageNum", cri.getPerPageNum())
+              .queryParam("searchType", ((SearchCriteria)cri).getSearchType())
+              .queryParam("keyword", encoding(((SearchCriteria)cri).getKeyword()))
+              .build(); 
+      return uriComponents.toUriString();  
+  }
+
+  private String encoding(String keyword) {
+      if(keyword == null || keyword.trim().length() == 0) { 
+          return "";
+      }
+       
+      try {
+          return URLEncoder.encode(keyword, "UTF-8");
+      } catch(UnsupportedEncodingException e) { 
+          return ""; 
+      }
   }
 
 }

@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.coanimal.ams.domain.Criteria;
 import com.coanimal.ams.domain.Info;
 import com.coanimal.ams.domain.PageMaker;
+import com.coanimal.ams.domain.SearchCriteria;
 import com.coanimal.ams.service.InfoService;
 
 @Controller
@@ -45,20 +47,28 @@ public class InfoController {
   }
 
   @GetMapping("detail")
-  public void detail(int infoNo, Model model) throws Exception {
+  public void detail(int infoNo, Model model, Criteria cri) throws Exception {
     model.addAttribute("info", infoService.get(infoNo));
-  }
-
-  @GetMapping("list")
-  public void list(Model model, Criteria cri) throws Exception {
-
-    model.addAttribute("list", infoService.list(cri));
     
     PageMaker pageMaker = new PageMaker();
     pageMaker.setCri(cri);
-    pageMaker.setTotalCount(infoService.countInfoListTotal());
     
-    model.addAttribute("pageMaker", pageMaker);
+    model.addAttribute("page", cri.getPage());
+    model.addAttribute("PageMaker", pageMaker);
+
+  }
+
+  // 리스트 + 페이징
+  @GetMapping("list")
+  public void list(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
+
+    model.addAttribute("list", infoService.list(scri)); // 게시판의 글 리스트
+    
+    PageMaker pageMaker = new PageMaker();
+    pageMaker.setCri(scri);
+    pageMaker.setTotalCount(infoService.countInfoListTotal(scri));
+    
+    model.addAttribute("pageMaker", pageMaker); // 게시판 하단의 페이징 관련, 이전페이지, 페이지 링크 , 다음 페이지
   }
 
   @GetMapping("updateForm")

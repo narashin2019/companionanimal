@@ -8,6 +8,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 import com.coanimal.ams.dao.InfoDao;
 import com.coanimal.ams.domain.Criteria;
 import com.coanimal.ams.domain.Info;
+import com.coanimal.ams.domain.SearchCriteria;
 import com.coanimal.ams.service.InfoService;
 
 @Component
@@ -28,8 +29,8 @@ public class InfoServiceImpl implements InfoService {
   }
 
   @Override
-  public List<Info> list(Criteria cri) throws Exception {
-    return infoDao.findAll(cri);
+  public List<Info> list(SearchCriteria scri) throws Exception {
+    return infoDao.findAll(scri);
   }
 
   @Override
@@ -47,14 +48,14 @@ public class InfoServiceImpl implements InfoService {
     return infoDao.findByNo(infoNo);
   }
 
+  // 게시물 총 개수 구하기
+  public int countInfoListTotal(SearchCriteria scri) throws Exception {
+    return infoDao.countInfoList(scri);
+  }
+
   @Override
   public List<Info> search(String keyword) throws Exception {
     return infoDao.findByKeyword(keyword);
-  }
-  
-  // 게시물 총 개수 구하기
-  public int countInfoListTotal() throws Exception {
-    return infoDao.countInfoList();
   }
 
 

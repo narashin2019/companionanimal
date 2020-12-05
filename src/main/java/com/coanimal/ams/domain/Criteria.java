@@ -2,8 +2,8 @@ package com.coanimal.ams.domain;
 
 public class Criteria {
   
-  private int page;
-  private int perPageNum;
+  private int page; //현재페이지번호
+  private int perPageNum; // 페이지당 보여줄 게시글의 개수
   
   public int getPageStart() {
       return (this.page-1)*perPageNum;

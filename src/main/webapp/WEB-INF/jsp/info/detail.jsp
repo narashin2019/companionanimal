@@ -33,7 +33,6 @@
 <button type="submit" class="list_btn"><a href="list.jsp">목록</a></button>  
 </div>
 
-
 <c:if test="${empty requestScope.info}">
 <p>해당 게시물이 없습니다.</p>
 </c:if>

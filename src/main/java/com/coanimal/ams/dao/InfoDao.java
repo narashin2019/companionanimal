@@ -3,6 +3,7 @@ package com.coanimal.ams.dao;
 import java.util.List;
 import com.coanimal.ams.domain.Criteria;
 import com.coanimal.ams.domain.Info;
+import com.coanimal.ams.domain.SearchCriteria;
 
 // 데이터를 저장하고 꺼내는 방식(파일, 클라우드저장소, DB 등)에 상관없이
 // DAO 사용법을 통일하기 위해
@@ -11,7 +12,7 @@ import com.coanimal.ams.domain.Info;
 public interface InfoDao {
   public int insert(Info info) throws Exception;
 
-  public List<Info> findAll(Criteria cri) throws Exception;
+  public List<Info> findAll(SearchCriteria scri) throws Exception;
 
   public Info findByNo(int infoNo) throws Exception;
 
@@ -23,7 +24,7 @@ public interface InfoDao {
   public List<Info> findByKeyword(String keyword) throws Exception;
   
   //총 게시글 갯수 구하기
-  public int countInfoList() throws Exception;
+  public int countInfoList(SearchCriteria scri) throws Exception;
 
 }
 

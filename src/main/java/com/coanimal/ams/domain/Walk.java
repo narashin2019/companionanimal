@@ -104,6 +104,7 @@ public class Walk implements Serializable {
       return false;
     }
     return true;
+
   }
 
 
@@ -198,5 +199,5 @@ public class Walk implements Serializable {
 
 
 
-
 }
+

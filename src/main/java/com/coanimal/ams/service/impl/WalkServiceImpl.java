@@ -6,7 +6,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 import com.coanimal.ams.dao.WalkDao;
-import com.coanimal.ams.domain.Criteria;
+import com.coanimal.ams.domain.SearchCriteria;
 import com.coanimal.ams.domain.Walk;
 import com.coanimal.ams.service.WalkService;
 
@@ -28,8 +28,8 @@ public class WalkServiceImpl implements WalkService {
   }
 
   @Override
-  public List<Walk> list(Criteria cri) throws Exception {
-    return walkDao.findAll(cri);
+  public List<Walk> list(SearchCriteria scri) throws Exception {
+    return walkDao.findAll(scri);
   }
 
   @Override
@@ -47,16 +47,16 @@ public class WalkServiceImpl implements WalkService {
     return walkDao.findByNo(walkNo);
   }
 
-  @Override
-  public List<Walk> search(String keyword) throws Exception {
-    return walkDao.findByKeyword(keyword);
-  }
-
-
   // 게시물 총 개수 구하기
   @Override
-  public int countWalkListTotal() throws Exception {
-    return walkDao.countWalkList();
+  public int countWalkListTotal(SearchCriteria scri) throws Exception {
+    return walkDao.countWalkList(scri);
   }
+
+  //  @Override
+  //  public List<Walk> search(String keyword) throws Exception {
+  //    return walkDao.findByKeyword(keyword);
+  //  }
+
 
 }

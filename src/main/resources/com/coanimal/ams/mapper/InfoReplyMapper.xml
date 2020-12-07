@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.coanimal.ams.dao.InfoReplyDao">
+
+  <resultMap type="InfoReply" id="InfoReplyMap">
+    <id column="info_reply_no" property="infoReplyNo"/>
+    <result column="info_no" property="infoNo"/>
+    <result column="content" property="content"/>
+    <result column="create_date" property="createDate"/>
+    <result column="member_no" property="memberNo"/>
+    <result column="nickname" property="nickname" />
+  </resultMap>
+  
+
+  <!-- 댓글 조회 -->
+  <select id="readReply" resultMap="InfoReplyMap">
+  SELECT
+      r.info_reply_no,
+      m.nickname,
+      r.content,
+      r.create_date
+    FROM
+      info_reply AS r 
+    LEFT JOIN member AS m ON r.member_no=m.member_no 
+    WHERE 
+      r.info_no=#{infoNo}
+  </select>
+  
+  <!-- 댓글 작성 -->
+  <insert id="writeReply" parameterType="InfoReply" useGeneratedKeys="true" keyProperty="infoReplyNo">
+  INSERT INTO info_reply(
+    info_no,
+    content
+  )
+  VALUES(
+    #{infoNo},
+    #{content}
+  )
+  </insert>
+ 
+  <!-- 댓글 수정 -->
+  <update id="updateReply" parameterType="InfoReply">
+    UPDATE 
+      info_reply 
+    SET 
+      content = #{content}
+    WHERE info_reply_no = #{infoReplyNo}
+  </update>
+
+  <!-- 댓글 삭제 -->
+  <delete id="deleteReply" parameterType="InfoReply">
+    DELETE FROM info_reply
+    WHERE info_reply_no = #{infoReplyNo}
+  </delete>
+  
+  <!-- 선택된 댓글 조회 -->
+  <select id="selectReply" resultMap="InfoReplyMap" parameterType="int">
+    SELECT
+      r.info_no,
+      r.info_reply_no,
+      m.nickname,
+      r.content,
+      r.create_date
+    FROM
+      info_reply AS r 
+    LEFT JOIN member AS m ON r.member_no=m.member_no 
+    WHERE 
+      r.info_reply_no = #{infoReplyNo}
+  </select>
+
+  
+</mapper>
+
+
+
+
+
+
+

@@ -3,46 +3,26 @@ package com.coanimal.ams.domain;
 import java.io.Serializable;
 import java.sql.Date;
 
-// 객체를 serialize 하려면 이 기능을 활성화시켜야 한다.
-// - java.io.Serializable을 구현하라!
-// - serialize 데이터를 구분하기 위해 버전 번호를 명시하라.
-//
+// 20201207
 public class Member implements Serializable {
 
-  private static final long serialVersionUID = 20200131L;
+  private static final long serialVersionUID = 20201207L;
 
-  private int no;
-  private String name;
+  private int memberNo;
   private String email;
+  private String idPhoto;
   private String password;
-  private String photo;
-  private String tel;
-  private Date registeredDate;
+  private String nickname;
+  private Date createdDate;
+  private String userkey;
+  private int loginmethod;
+  
 
   @Override
   public String toString() {
-    return "Member [no=" + no + ", name=" + name + ", email=" + email + ", password=" + password
-        + ", photo=" + photo + ", tel=" + tel + ", registeredDate=" + registeredDate + "]";
-  }
-
-  public static Member valueOf(String csv) {
-    String[] data = csv.split(",");
-
-    Member member = new Member();
-    member.setNo(Integer.parseInt(data[0]));
-    member.setName(data[1]);
-    member.setEmail(data[2]);
-    member.setPassword(data[3]);
-    member.setPhoto(data[4]);
-    member.setTel(data[5]);
-    member.setRegisteredDate(Date.valueOf(data[6]));
-
-    return member;
-  }
-
-  public String toCsvString() {
-    return String.format("%d,%s,%s,%s,%s,%s,%s", this.getNo(), this.getName(), this.getEmail(),
-        this.getPassword(), this.getPhoto(), this.getTel(), this.getRegisteredDate());
+    return "Member [memberNo=" + memberNo + ", email=" + email + ", idPhoto=" + idPhoto
+        + ", password=" + password + ", nickname=" + nickname + ", createdDate=" + createdDate
+        + ", userkey=" + userkey + ", loginmethod=" + loginmethod + "]";
   }
 
 
@@ -50,15 +30,17 @@ public class Member implements Serializable {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
+    result = prime * result + ((createdDate == null) ? 0 : createdDate.hashCode());
     result = prime * result + ((email == null) ? 0 : email.hashCode());
-    result = prime * result + ((name == null) ? 0 : name.hashCode());
-    result = prime * result + no;
+    result = prime * result + ((idPhoto == null) ? 0 : idPhoto.hashCode());
+    result = prime * result + loginmethod;
+    result = prime * result + memberNo;
+    result = prime * result + ((nickname == null) ? 0 : nickname.hashCode());
     result = prime * result + ((password == null) ? 0 : password.hashCode());
-    result = prime * result + ((photo == null) ? 0 : photo.hashCode());
-    result = prime * result + ((registeredDate == null) ? 0 : registeredDate.hashCode());
-    result = prime * result + ((tel == null) ? 0 : tel.hashCode());
+    result = prime * result + ((userkey == null) ? 0 : userkey.hashCode());
     return result;
   }
+
 
   @Override
   public boolean equals(Object obj) {
@@ -69,94 +51,124 @@ public class Member implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     Member other = (Member) obj;
+    if (createdDate == null) {
+      if (other.createdDate != null)
+        return false;
+    } else if (!createdDate.equals(other.createdDate))
+      return false;
     if (email == null) {
       if (other.email != null)
         return false;
     } else if (!email.equals(other.email))
       return false;
-    if (name == null) {
-      if (other.name != null)
+    if (idPhoto == null) {
+      if (other.idPhoto != null)
         return false;
-    } else if (!name.equals(other.name))
+    } else if (!idPhoto.equals(other.idPhoto))
       return false;
-    if (no != other.no)
+    if (loginmethod != other.loginmethod)
+      return false;
+    if (memberNo != other.memberNo)
+      return false;
+    if (nickname == null) {
+      if (other.nickname != null)
+        return false;
+    } else if (!nickname.equals(other.nickname))
       return false;
     if (password == null) {
       if (other.password != null)
         return false;
     } else if (!password.equals(other.password))
       return false;
-    if (photo == null) {
-      if (other.photo != null)
+    if (userkey == null) {
+      if (other.userkey != null)
         return false;
-    } else if (!photo.equals(other.photo))
-      return false;
-    if (registeredDate == null) {
-      if (other.registeredDate != null)
-        return false;
-    } else if (!registeredDate.equals(other.registeredDate))
-      return false;
-    if (tel == null) {
-      if (other.tel != null)
-        return false;
-    } else if (!tel.equals(other.tel))
+    } else if (!userkey.equals(other.userkey))
       return false;
     return true;
   }
 
-  public int getNo() {
-    return no;
+
+  public int getMemberNo() {
+    return memberNo;
   }
 
-  public void setNo(int no) {
-    this.no = no;
+
+  public void setMemberNo(int memberNo) {
+    this.memberNo = memberNo;
   }
 
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
 
   public String getEmail() {
     return email;
   }
 
+
   public void setEmail(String email) {
     this.email = email;
   }
+
+
+  public String getIdPhoto() {
+    return idPhoto;
+  }
+
+
+  public void setIdPhoto(String idPhoto) {
+    this.idPhoto = idPhoto;
+  }
+
 
   public String getPassword() {
     return password;
   }
 
+
   public void setPassword(String password) {
     this.password = password;
   }
 
-  public String getPhoto() {
-    return photo;
+
+  public String getNickname() {
+    return nickname;
   }
 
-  public void setPhoto(String photo) {
-    this.photo = photo;
+
+  public void setNickname(String nickname) {
+    this.nickname = nickname;
   }
 
-  public String getTel() {
-    return tel;
+
+  public Date getCreatedDate() {
+    return createdDate;
   }
 
-  public void setTel(String tel) {
-    this.tel = tel;
+
+  public void setCreatedDate(Date createdDate) {
+    this.createdDate = createdDate;
   }
 
-  public Date getRegisteredDate() {
-    return registeredDate;
+
+  public String getUserkey() {
+    return userkey;
   }
 
-  public void setRegisteredDate(Date registeredDate) {
-    this.registeredDate = registeredDate;
+
+  public void setUserkey(String userkey) {
+    this.userkey = userkey;
   }
+
+
+  public int getLoginmethod() {
+    return loginmethod;
+  }
+
+
+  public void setLoginmethod(int loginmethod) {
+    this.loginmethod = loginmethod;
+  }
+
+
+
+
 }

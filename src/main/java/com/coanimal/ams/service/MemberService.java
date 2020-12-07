@@ -1,23 +1,14 @@
 package com.coanimal.ams.service;
 
-import java.util.List;
 import com.coanimal.ams.domain.Member;
 
 public interface MemberService {
 
-  List<Member> list() throws Exception;
+  // 회원가입
+  public void register(Member member) throws Exception;
 
-  int delete(int no) throws Exception;
-
-  int add(Member member) throws Exception;
-
-  Member get(int no) throws Exception;
-
-  Member get(String email, String password) throws Exception;
-
-  List<Member> search(String keyword) throws Exception;
-
-  int update(Member member) throws Exception;
+  // 로그인
+  public Member login(Member member) throws Exception;
 
 
 }

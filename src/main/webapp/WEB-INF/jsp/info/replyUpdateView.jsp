@@ -42,7 +42,7 @@
       
         <form name="updateForm" role="form" method="post" action="replyUpdate">
         
-          <input type="hidden name="infoNo" value="${replyUpdate.infoNo}" readonly="readonly"/>
+          <input type="hidden" name="infoNo" value="${replyUpdate.infoNo}" readonly="readonly"/>
           <input type="hidden" id="infoReplyNo" name="infoReplyNo" value="${replyUpdate.infoReplyNo}" />
           <input type="hidden" id="page" name="page" value="${scri.page}"> 
           <input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 

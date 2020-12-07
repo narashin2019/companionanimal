@@ -49,10 +49,10 @@ public class InfoController {
   @GetMapping("detail")
   public void detail(int infoNo, Model model, Criteria cri) throws Exception {
     model.addAttribute("info", infoService.get(infoNo));
-    
+
     PageMaker pageMaker = new PageMaker();
     pageMaker.setCri(cri);
-    
+
     model.addAttribute("page", cri.getPage());
     model.addAttribute("PageMaker", pageMaker);
 
@@ -63,11 +63,11 @@ public class InfoController {
   public void list(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
 
     model.addAttribute("list", infoService.list(scri)); // 게시판의 글 리스트
-    
+
     PageMaker pageMaker = new PageMaker();
     pageMaker.setCri(scri);
     pageMaker.setTotalCount(infoService.countInfoListTotal(scri));
-    
+
     model.addAttribute("pageMaker", pageMaker); // 게시판 하단의 페이징 관련, 이전페이지, 페이지 링크 , 다음 페이지
   }
 
@@ -78,17 +78,17 @@ public class InfoController {
 
   @PostMapping("update")
   public String update(Info info) throws Exception {
-    
+
     logger.info("update");
-   
-    infoService.update(info); 
+
+    infoService.update(info);
     return "redirect:detail?infoNo=" + info.getInfoNo();
   }
-  
+
   @GetMapping("search")
   public void search(String keyword, Model model) throws Exception {
     model.addAttribute("list", infoService.search(keyword));
   }
 
-  
+
 }

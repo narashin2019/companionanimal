@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <html>
   <head>
@@ -16,8 +18,8 @@
 <div>
     카테고리:
     <select name="walkCategory">
+      <option value="지역">지역</option>
       <option value="정보">정보</option>
-      <option value="공구">공구</option>
     </select>
 </div>
 제목: <input name='title' type='text'><br>

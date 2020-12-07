@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.coanimal.ams.domain.Criteria;
 import com.coanimal.ams.domain.PageMaker;
+import com.coanimal.ams.domain.SearchCriteria;
 import com.coanimal.ams.domain.Walk;
 import com.coanimal.ams.service.WalkService;
 
@@ -46,20 +48,27 @@ public class WalkController {
   }
 
   @GetMapping("detail")
-  public void detail(int walkNo, Model model) throws Exception {
+  public void detail(int walkNo, Model model, Criteria cri) throws Exception {
     model.addAttribute("walk", walkService.get(walkNo));
-  }
-
-  @GetMapping("list")
-  public void list(Model model, Criteria cri) throws Exception {
-
-    model.addAttribute("list", walkService.list(cri));
 
     PageMaker pageMaker = new PageMaker();
     pageMaker.setCri(cri);
-    pageMaker.setTotalCount(walkService.countWalkListTotal());
 
-    model.addAttribute("pageMaker", pageMaker);
+    model.addAttribute("page", cri.getPage());
+    model.addAttribute("PageMaker", pageMaker);
+  }
+
+  // 리스트 + 페이징
+  @GetMapping("list")
+  public void list(Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
+
+    model.addAttribute("list", walkService.list(scri)); // 게시판의 글 리스트
+
+    PageMaker pageMaker = new PageMaker();
+    pageMaker.setCri(scri);
+    pageMaker.setTotalCount(walkService.countWalkListTotal(scri));
+
+    model.addAttribute("pageMaker", pageMaker); // 게시판 하단의 페이징 관련, 이전페이지, 페이지 링크, 다음 페이지
   }
 
   @GetMapping("updateForm")
@@ -69,12 +78,15 @@ public class WalkController {
 
   @PostMapping("update")
   public String update(Walk walk) throws Exception {
+
+    logger.info("update");
+
     walkService.update(walk);
-    return "redirect:list";
+    return "redirect:detail?walkNo=" + walk.getWalkNo();
   }
 
-  @GetMapping("search")
-  public void search(String keyword, Model model) throws Exception {
-    model.addAttribute("list", walkService.search(keyword));
-  }
+  //  @GetMapping("search")
+  //  public void search(String keyword, Model model) throws Exception {
+  //    model.addAttribute("list", walkService.search(keyword));
+  //  }
 }

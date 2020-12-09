@@ -72,7 +72,7 @@
      
     function fn_fileDown(fileNo){
       var formObj = $("form[name='detail']");
-      $("#file_no").attr("value", fileNo);
+      $("#file_no").attr("value", fileNo); //file_no로 하면 안되더라 왜징
       formObj.attr("action", "fileDown");
       formObj.submit();
     }

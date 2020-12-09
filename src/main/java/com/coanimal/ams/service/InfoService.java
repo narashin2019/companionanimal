@@ -27,4 +27,7 @@ public interface InfoService {
 
   // 첨부파일 조회
   public List<Map<String, Object>> selectFileList(int infoNo) throws Exception;
+  
+  //첨부파일 다운
+  public Map<String, Object> selectFileInfo(Map<String, Object> map) throws Exception;
 }

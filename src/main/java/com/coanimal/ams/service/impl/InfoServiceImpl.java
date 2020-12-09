@@ -82,5 +82,12 @@ public class InfoServiceImpl implements InfoService {
       return infoDao.selectFileList(infoNo);
   }
   
+  // 첨부파일 다운로드
+  @Override
+  public Map<String, Object> selectFileInfo(Map<String, Object> map) throws Exception {
+      return infoDao.selectFileInfo(map);
+  }
+  
+  
 
 }

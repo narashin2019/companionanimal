@@ -1,6 +1,7 @@
 package com.coanimal.ams.dao;
 
 import java.util.List;
+import java.util.Map;
 import com.coanimal.ams.domain.Info;
 import com.coanimal.ams.domain.SearchCriteria;
 
@@ -24,6 +25,9 @@ public interface InfoDao {
   public int delete(int infoNo) throws Exception;
   
   //public List<Info> findByKeyword(String keyword) throws Exception;
+  
+  //첨부파일 업로드
+  public void insertFile(Map<String, Object> map) throws Exception;
   
 
 

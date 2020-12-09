@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.coanimal.ams.domain.Info;
 import com.coanimal.ams.domain.InfoReply;
@@ -39,10 +40,10 @@ public class InfoController {
   @GetMapping("form")
   public void form() throws Exception {}
 
-  // 게시글 추가
+  // 게시글 추가 + 첨부파일 업로드
   @PostMapping("add")
-  public String add(Info info) throws Exception {
-    infoService.add(info);
+  public String add(Info info, MultipartHttpServletRequest mpRequest) throws Exception {
+    infoService.add(info, mpRequest);
     return "redirect:detail?infoNo=" + info.getInfoNo();
   }
 

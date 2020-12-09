@@ -47,12 +47,12 @@ DROP TABLE IF EXISTS info_file RESTRICT;
 -- 회원
 DROP TABLE IF EXISTS member RESTRICT;
 
-//////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 -- 산책친구게시글
 CREATE TABLE walk_board (
   walk_no       INTEGER      NOT NULL COMMENT '산책친구게시글번호', -- 산책친구게시글번호
-  member_no     INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+  member_no     INTEGER      NULL     COMMENT '회원번호', -- 회원번호
   walk_category VARCHAR(10)  NULL     COMMENT '카테고리', -- 카테고리
   title         VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
   content       TEXT         NOT NULL COMMENT '내용', -- 내용
@@ -80,7 +80,7 @@ CREATE TABLE walk_reply (
   walk_reply_no INTEGER  NOT NULL COMMENT '산책친구댓글번호', -- 산책친구댓글번호
   content       TEXT     NOT NULL COMMENT '댓글내용', -- 댓글내용
   walk_no       INTEGER  NOT NULL COMMENT '산책친구게시글번호', -- 산책친구게시글번호
-  member_no     INTEGER  NOT NULL COMMENT '회원번호', -- 회원번호
+  member_no     INTEGER  NULL     COMMENT '회원번호', -- 회원번호
   create_date   DATETIME NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
 )
 COMMENT '산책친구댓글';
@@ -117,7 +117,7 @@ ALTER TABLE walk_file
 -- 일상게시글
 CREATE TABLE daily_board (
   daily_no       INTEGER      NOT NULL COMMENT '일상게시글번호', -- 일상게시글번호
-  member_no      INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+  member_no      INTEGER      NULL     COMMENT '회원번호', -- 회원번호
   daily_category VARCHAR(10)  NULL     COMMENT '카테고리', -- 카테고리
   title          VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
   content        TEXT         NOT NULL COMMENT '내용', -- 내용
@@ -139,7 +139,7 @@ CREATE TABLE daily_reply (
   daily_reply_no INTEGER  NOT NULL COMMENT '산책친구댓글번호', -- 산책친구댓글번호
   content        TEXT     NOT NULL COMMENT '댓글내용', -- 댓글내용
   daily_no       INTEGER  NOT NULL COMMENT '일상게시글번호', -- 일상게시글번호
-  member_no      INTEGER  NOT NULL COMMENT '회원번호', -- 회원번호
+  member_no      INTEGER  NULL     COMMENT '회원번호', -- 회원번호
   create_date    DATETIME NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
 )
 COMMENT '일상댓글';
@@ -198,7 +198,7 @@ CREATE TABLE info_reply (
   info_reply_no INTEGER  NOT NULL COMMENT '정보공유댓글번호', -- 정보공유댓글번호
   content       TEXT     NOT NULL COMMENT '댓글내용', -- 댓글내용
   info_no       INTEGER  NOT NULL COMMENT '정보공유게시글번호', -- 정보공유게시글번호
-  member_no     INTEGER  NOT NULL COMMENT '회원번호', -- 회원번호
+  member_no     INTEGER  NULL     COMMENT '회원번호', -- 회원번호
   create_date   DATETIME NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
 )
 COMMENT '정보공유댓글';
@@ -218,10 +218,13 @@ ALTER TABLE info_reply
 
 -- 정보공유첨부파일
 CREATE TABLE info_file (
-  file_no   INTEGER     NOT NULL COMMENT '파일번호', -- 파일번호
-  info_no   INTEGER     NULL     COMMENT '정보공유게시글번호', -- 정보공유게시글번호
-  file_name VARCHAR(40) NOT NULL COMMENT '파일이름', -- 파일이름
-  regdate   DATETIME    NOT NULL DEFAULT now() COMMENT '파일등록일' -- 파일등록일
+  file_no          INTEGER      NOT NULL COMMENT '파일번호', -- 파일번호
+  info_no          INTEGER      NOT NULL COMMENT '정보공유게시글번호', -- 정보공유게시글번호
+  org_file_name    VARCHAR(260) NOT NULL COMMENT '원본파일이름', -- 원본파일이름
+  stored_file_name VARCHAR(40)  NOT NULL COMMENT '변경된파일이름', -- 변경된파일이름
+  regdate          DATETIME     NOT NULL DEFAULT now() COMMENT '파일등록일', -- 파일등록일
+  file_size        INTEGER      NULL     COMMENT '파일크기', -- 파일크기
+  del_gb           VARCHAR(1)   NULL     COMMENT '삭제구분' -- 삭제구분
 )
 COMMENT '정보공유첨부파일';
 
@@ -384,14 +387,4 @@ ALTER TABLE info_reply
     )
     REFERENCES member ( -- 회원
       member_no -- 회원번호
-    );
-
--- 정보공유첨부파일
-ALTER TABLE info_file
-  ADD CONSTRAINT FK_info_board_TO_info_file -- 정보공유게시글 -> 정보공유첨부파일
-    FOREIGN KEY (
-      info_no -- 정보공유게시글번호
-    )
-    REFERENCES info_board ( -- 정보공유게시글
-      info_no -- 정보공유게시글번호
     );

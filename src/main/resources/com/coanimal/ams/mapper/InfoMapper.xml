@@ -154,10 +154,12 @@
   <!-- 첨부파일 조회 -->
   <select id="selectFileList" parameterType="int" resultType="hashMap">
 	  SELECT 
+	    file_no,
 	    org_file_name,
 	    round(file_size/1024,1) AS file_size
 	   FROM info_file
-	   WHERE info_no = #{info_no}
+	   WHERE info_no = #{infoNo}
+	   
 	   ORDER BY file_no ASC
   </select>
   

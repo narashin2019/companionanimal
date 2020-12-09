@@ -1,6 +1,7 @@
 package com.coanimal.ams.web;
 
 import java.util.List;
+import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,9 +67,13 @@ public class InfoController {
     model.addAttribute("detail", infoService.get(infoNo));
     model.addAttribute("scri", scri);
     
-    //댓글 조회
+    // 댓글 조회
     List<InfoReply> replyList = infoReplyService.readReply(infoNo);
     model.addAttribute("replyList", replyList);
+    
+    // 첨부파일 조회
+    List<Map<String, Object>> fileList = infoService.selectFileList(infoNo);
+    model.addAttribute("file", fileList);
   }
 
   // 리스트 + 페이징

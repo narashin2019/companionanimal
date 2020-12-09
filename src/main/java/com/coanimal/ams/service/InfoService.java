@@ -1,6 +1,7 @@
 package com.coanimal.ams.service;
 
 import java.util.List;
+import java.util.Map;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.coanimal.ams.domain.Info;
 import com.coanimal.ams.domain.SearchCriteria;
@@ -24,5 +25,6 @@ public interface InfoService {
 
   //List<Info> search(String keyword) throws Exception;
 
-
+  // 첨부파일 조회
+  public List<Map<String, Object>> selectFileList(int infoNo) throws Exception;
 }

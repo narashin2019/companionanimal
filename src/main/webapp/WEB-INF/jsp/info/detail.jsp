@@ -4,7 +4,12 @@
 
 <html>
 <head>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <!-- 부가적인 테마 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+  <!-- 제이쿼리 -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>정보/공구게시판</title>
 </head>
 
@@ -63,8 +68,14 @@
           + "&keyword=${scri.keyword}"
           + "&infoReplyNo="+$(this).attr("data-rno");
       });
-    
     })
+     
+    function fn_fileDown(fileNo){
+      var formObj = $("form[name='detail']");
+      $("#file_no").attr("value", fileNo);
+      formObj.attr("action", "fileDown");
+      formObj.submit();
+    }
   </script> 
   
 
@@ -72,17 +83,15 @@
 <section id="container">
 
 <form name="detail" role="form" method="post">
-
   <input type="hidden" id="infoNo" name="infoNo" value="${detail.infoNo}" />
   <input type="hidden" id="page" name="page" value="${scri.page}"> 
   <input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
   <input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
   <input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
-
+  <input type="hidden" id="file_no" name="file_no" value=""> 
 </form>
 
 <div>
-<c:if test="${not empty detail}">
 번호: ${detail.infoNo}<br>
 등록일: <fmt:formatDate value="${detail.createDate}" pattern="yyyy-MM-dd" /><br>  
 작성자: ${detail.nickname}<br>
@@ -91,8 +100,17 @@
 제목: ${detail.title}<br>
 내용: ${detail.content}<br>
 좋아요: ${detail.likeCount}<br>
-</c:if>
 </div>
+
+<hr>
+<span>파일 목록</span>
+<div class="form-group">
+  <c:forEach var="file" items="${file}">
+    <a href="#" onclick="fn_fileDown('${file.file_no}'); return false;">${file.org_file_name}</a>(${file.file_size}kb)<br>
+  </c:forEach>
+</div>
+<hr>
+
 
 <div>
 <button type="submit" class="update_btn">수정</button>
@@ -100,6 +118,7 @@
 <button type="submit" class="list_btn">목록</button>  
 </div>
 
+<!-- 댓글 -->
 <div id="reply">
  <ol class="replyList">
     <c:forEach items="${replyList}" var="replyList">

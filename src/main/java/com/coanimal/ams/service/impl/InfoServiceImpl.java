@@ -75,5 +75,12 @@ public class InfoServiceImpl implements InfoService {
 //    return infoDao.findByKeyword(keyword);
 //  }
 
+  
+  // 첨부파일 조회
+  @Override
+  public List<Map<String, Object>> selectFileList(int infoNo) throws Exception {
+      return infoDao.selectFileList(infoNo);
+  }
+  
 
 }

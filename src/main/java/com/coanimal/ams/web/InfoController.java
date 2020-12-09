@@ -98,15 +98,22 @@ public class InfoController {
   public void updateForm(int infoNo, Model model, @ModelAttribute("scri") SearchCriteria scri) throws Exception {
     model.addAttribute("update", infoService.get(infoNo));
     model.addAttribute("scri", scri);
+    
+    // 첨부파일 수정
+    List<Map<String, Object>> fileList = infoService.selectFileList(infoNo);
+    model.addAttribute("file", fileList);
   }
 
-  // 게시글 수정
+  // 게시글 수정 + 첨부파일 수정
   @PostMapping("update")
-  public String update(Info info, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr) throws Exception {
+  public String update(Info info, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr,
+      @RequestParam(value="fileNoDel[]") String[] files,
+      @RequestParam(value="fileNameDel[]") String[] fileNames,
+      MultipartHttpServletRequest mpRequest) throws Exception {
     
     logger.info("update");
    
-    infoService.update(info); 
+    infoService.update(info, files, fileNames, mpRequest); 
     
     rttr.addAttribute("page", scri.getPage());
     rttr.addAttribute("perPageNum", scri.getPerPageNum());

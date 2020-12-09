@@ -59,8 +59,20 @@ public class InfoServiceImpl implements InfoService {
   }
 
   @Override
-  public void update(Info info) throws Exception {
+  public void update(Info info, String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception {
     infoDao.update(info);
+    
+    List<Map<String, Object>> list = fileUtils.parseUpdateFileInfo(info, files, fileNames, mpRequest);
+    Map<String, Object> tempMap = null;
+    int size = list.size();
+    for(int i = 0; i<size; i++) {
+        tempMap = list.get(i);
+        if(tempMap.get("IS_NEW").equals("Y")) {
+            infoDao.insertFile(tempMap);
+        }else {
+          infoDao.updateFile(tempMap);
+        }
+    }
   }
 
   @Override

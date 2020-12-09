@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <!-- 부가적인 테마 -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-    
+    <!-- 제이쿼리 -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     
     <title>정보/공구 게시판</title>
@@ -26,6 +26,7 @@
         formObj.attr("method", "post");
         formObj.submit();
       });
+      fn_addFile();
     })
     function fn_valiChk(){
       var regForm = $("form[name='addForm'] .chk").length;
@@ -36,6 +37,18 @@
         }
       }
     }
+    
+    function fn_addFile(){
+        var fileIndex = 1;
+        //$("#fileIndex").append("<div><input type='file' style='float:left;' name='file_"+(fileIndex++)+"'>"+"<button type='button' style='float:right;' id='fileAddBtn'>"+"추가"+"</button></div>");
+        $(".fileAdd_btn").on("click", function(){
+          $("#fileIndex").append("<div><input type='file' style='float:left;' name='file_"+(fileIndex++)+"'>"+"</button>"+"<button type='button' style='float:right;' id='fileDelBtn'>"+"삭제"+"</button></div>");
+        });
+        $(document).on("click","#fileDelBtn", function(){
+          $(this).parent().remove();
+          
+        });
+      }
   </script>
   <body>
   
@@ -70,11 +83,11 @@
                 <tr>
       -->
                 <tr>
-                  <td>
-                    <input type="file" name="file">
+                  <td id="fileIndex">
                   </td>
                 <tr>
                   <td>            
+                    <button class="fileAdd_btn" type="button">파일추가</button>
                     <button class="write_btn" type="submit">작성</button> 
                   </td>
                 </tr> 

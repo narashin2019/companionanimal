@@ -21,13 +21,14 @@ public interface InfoService {
 
   Info get(int infoNo) throws Exception;
 
-  void update(Info info) throws Exception;
+  // 게시글 수정 + 첨부파일 수정
+  void update(Info info, String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception;
 
   //List<Info> search(String keyword) throws Exception;
 
   // 첨부파일 조회
   public List<Map<String, Object>> selectFileList(int infoNo) throws Exception;
   
-  //첨부파일 다운
+  // 첨부파일 다운로드
   public Map<String, Object> selectFileInfo(Map<String, Object> map) throws Exception;
 }

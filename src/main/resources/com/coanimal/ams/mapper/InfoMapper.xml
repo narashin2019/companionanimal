@@ -136,6 +136,15 @@
   </select>
 
 
+    
+  <!-- 게시글 조회수 -->
+  <update id="plusCnt" parameterType="int">
+    UPDATE info_board SET
+     view_count = view_count + 1
+    WHERE info_no=#{infoNo}
+  </update>
+  
+    
   <!-- 첨부파일 업로드 -->
   <insert id="insertFile" parameterType="hashMap">
     INSERT INTO info_file(

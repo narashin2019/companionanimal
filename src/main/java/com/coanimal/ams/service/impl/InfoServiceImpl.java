@@ -78,8 +78,10 @@ public class InfoServiceImpl implements InfoService {
     }
   }
 
+  // 게시물 조회 + 조회수 카운트
   @Override
   public Info get(int infoNo) throws Exception {
+    infoDao.plusCnt(infoNo);
     return infoDao.findByNo(infoNo);
   }
 

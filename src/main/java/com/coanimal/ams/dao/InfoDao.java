@@ -38,6 +38,8 @@ public interface InfoDao {
   // 첨부파일 수정
   public void updateFile(Map<String, Object> map) throws Exception;
   
+  // 게시물 조회수
+  public void plusCnt(int infoNo) throws Exception;
 }
 
 

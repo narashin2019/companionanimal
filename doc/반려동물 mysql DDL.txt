@@ -47,7 +47,7 @@ DROP TABLE IF EXISTS info_file RESTRICT;
 -- 회원
 DROP TABLE IF EXISTS member RESTRICT;
 
-////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
 
 -- 산책친구게시글
 CREATE TABLE walk_board (
@@ -224,7 +224,7 @@ CREATE TABLE info_file (
   stored_file_name VARCHAR(40)  NOT NULL COMMENT '변경된파일이름', -- 변경된파일이름
   regdate          DATETIME     NOT NULL DEFAULT now() COMMENT '파일등록일', -- 파일등록일
   file_size        INTEGER      NULL     COMMENT '파일크기', -- 파일크기
-  del_gb           VARCHAR(1)   NULL     COMMENT '삭제구분' -- 삭제구분
+  del_gb           TINYINT(1)   NULL     DEFAULT 0 COMMENT '삭제구분' -- 삭제구분
 )
 COMMENT '정보공유첨부파일';
 

@@ -58,16 +58,19 @@ public class InfoServiceImpl implements InfoService {
     infoDao.delete(infoNo);
   }
 
+  // 게시뭉 수정 + 첨부파일 수정
+  @Transactional
   @Override
   public void update(Info info, String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception {
     infoDao.update(info);
     
     List<Map<String, Object>> list = fileUtils.parseUpdateFileInfo(info, files, fileNames, mpRequest);
     Map<String, Object> tempMap = null;
+    
     int size = list.size();
     for(int i = 0; i<size; i++) {
         tempMap = list.get(i);
-        if(tempMap.get("IS_NEW").equals("Y")) {
+        if(tempMap.get("IS_NEW").equals("1")) {
             infoDao.insertFile(tempMap);
         }else {
           infoDao.updateFile(tempMap);

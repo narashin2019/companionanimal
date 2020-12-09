@@ -63,42 +63,52 @@ public class FileUtils {
     }
     
     public List<Map<String, Object>> parseUpdateFileInfo(Info info, String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception{ 
-     
+      
       Iterator<String> iterator = mpRequest.getFileNames();
+      
       MultipartFile multipartFile = null; 
       String originalFileName = null; 
       String originalFileExtension = null; 
       String storedFileName = null; 
+      
       List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
       Map<String, Object> listMap = null; 
+      
       int infoNo = info.getInfoNo();
       
       while(iterator.hasNext()){ 
-          multipartFile = mpRequest.getFile(iterator.next()); 
-          if(multipartFile.isEmpty() == false){ 
-              originalFileName = multipartFile.getOriginalFilename(); 
-              originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf(".")); 
-              storedFileName = getRandomString() + originalFileExtension; 
-              multipartFile.transferTo(new File(filePath + storedFileName)); 
-              listMap = new HashMap<String,Object>();
-              listMap.put("IS_NEW", "Y");
-              listMap.put("info_no", infoNo); 
-              listMap.put("org_file_name", originalFileName);
-              listMap.put("stored_file_name", storedFileName); 
-              listMap.put("file_size", multipartFile.getSize()); 
-              list.add(listMap); 
-          } 
+        multipartFile = mpRequest.getFile(iterator.next()); 
+       
+        // multipartFile이 비어있지 않으면 if문 실행, 새로운 첨부파일이 등록되었을때
+        if (multipartFile.isEmpty() == false) { 
+            originalFileName = multipartFile.getOriginalFilename(); 
+            originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf(".")); 
+            storedFileName = getRandomString() + originalFileExtension; 
+            multipartFile.transferTo(new File(filePath + storedFileName)); 
+            listMap = new HashMap<String,Object>();
+            listMap.put("IS_NEW", "1");
+            listMap.put("info_no", infoNo); 
+            listMap.put("org_file_name", originalFileName);
+            listMap.put("stored_file_name", storedFileName); 
+            listMap.put("file_size", multipartFile.getSize()); 
+            list.add(listMap); 
+        } 
       }
-      if(files != null && fileNames != null){ 
-          for(int i = 0; i<fileNames.length; i++) {
+      
+      // files와 fileNames가 null이 아니면 for문 실행, 삭제할 파일의 파일 번호와 파일이름을 받음
+      if (files != null && fileNames != null) { 
+        System.out.println("포문이 실행되어야 하는데");
+          for(int i = 0; i < fileNames.length; i++) {
                   listMap = new HashMap<String,Object>();
-                  listMap.put("IS_NEW", "N");
+                  listMap.put("IS_NEW", "0");
                   listMap.put("file_no", files[i]); 
                   list.add(listMap); 
+                  System.out.println(listMap);
           }
-      }
+       }
       return list; 
-  }
+    }
+
     
     public static String getRandomString() {
         return UUID.randomUUID().toString().replaceAll("-", "");

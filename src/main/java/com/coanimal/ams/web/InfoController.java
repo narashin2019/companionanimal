@@ -102,6 +102,8 @@ public class InfoController {
     // 첨부파일 수정
     List<Map<String, Object>> fileList = infoService.selectFileList(infoNo);
     model.addAttribute("file", fileList);
+    System.out.println("파일리스트에 담긴것 확인");
+    System.out.println(fileList);
   }
 
   // 게시글 수정 + 첨부파일 수정
@@ -114,6 +116,9 @@ public class InfoController {
     logger.info("update");
    
     infoService.update(info, files, fileNames, mpRequest); 
+    System.out.println("파일스 파일네임스 jsp에서 받아왔나 확인");
+    System.out.println(files);
+    System.out.println(fileNames);
     
     rttr.addAttribute("page", scri.getPage());
     rttr.addAttribute("perPageNum", scri.getPerPageNum());

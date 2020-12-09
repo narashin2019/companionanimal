@@ -159,7 +159,7 @@
 	    round(file_size/1024,1) AS file_size
 	   FROM info_file
 	   WHERE info_no = #{info_no}
-	   
+	   AND del_gb = 0
 	   ORDER BY file_no ASC
   </select>
   
@@ -176,7 +176,7 @@
   <update id="updateFile" parameterType="hashMap">
      UPDATE info_file 
      SET
-       del_gb='Y'
+       del_gb=1
      WHERE file_no = #{file_no}
   </update>
 </mapper>

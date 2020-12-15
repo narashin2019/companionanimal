@@ -6,8 +6,8 @@ id_photo,
 password,      
 nickname,
 create_date,
-userkey,
-loginmethod
+authkey,
+authstatus
 ) 
 values(
 1,
@@ -17,7 +17,7 @@ password('1111'),
 '곰비둘기',
 '2020-12-01',
 '1111',
-1
+0
 );
 
 INSERT INTO member(
@@ -27,8 +27,8 @@ id_photo,
 password,      
 nickname,
 create_date,
-userkey,
-loginmethod
+authkey,
+authstatus
 ) 
 values(
 2,
@@ -38,7 +38,7 @@ password('1111'),
 '슬롯수',
 '2020-12-01',
 '2222',
-1
+0
 );
 
 INSERT INTO member(
@@ -48,8 +48,8 @@ id_photo,
 password,      
 nickname,
 create_date,
-userkey,
-loginmethod
+authkey,
+authstatus
 ) 
 values(
 3,
@@ -59,7 +59,7 @@ password('1111'),
 '롤안함',
 '2020-12-01',
 '3333',
-1
+0
 );
 
 

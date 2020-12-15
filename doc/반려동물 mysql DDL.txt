@@ -17,6 +17,7 @@ select * from members;
 DROP DATABASE 데이터베이스 이름
 
 ==========================
+
 -- 산책친구게시글
 DROP TABLE IF EXISTS walk_board RESTRICT;
 
@@ -47,7 +48,7 @@ DROP TABLE IF EXISTS info_file RESTRICT;
 -- 회원
 DROP TABLE IF EXISTS member RESTRICT;
 
-////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////
 
 -- 산책친구게시글
 CREATE TABLE walk_board (
@@ -249,8 +250,8 @@ CREATE TABLE member (
   password    VARCHAR(255) NOT NULL COMMENT '비밀번호', -- 비밀번호
   nickname    VARCHAR(50)  NULL     COMMENT '닉네임', -- 닉네임
   create_date DATETIME     NOT NULL DEFAULT now() COMMENT '가입일', -- 가입일
-  userkey     CHAR(30)     NULL     COMMENT '인증키', -- 인증키
-  loginmethod INTEGER      NOT NULL COMMENT '로그인방식' -- 로그인방식
+  authkey     CHAR(30)     NULL     COMMENT '권한키', -- 권한키
+  authstatus  INTEGER      NOT NULL DEFAULT 0 COMMENT '권한상태' -- 권한상태
 )
 COMMENT '회원';
 

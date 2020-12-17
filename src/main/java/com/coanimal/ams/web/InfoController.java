@@ -128,12 +128,6 @@ public class InfoController {
     return "redirect:detail?infoNo=" + info.getInfoNo();
   }
   
-//  @GetMapping("search")
-//  public void search(String keyword, Model model) throws Exception {
-//    model.addAttribute("list", infoService.search(keyword));
-//  }
-
-  
   //
   // 댓글 작성
   @RequestMapping(value="/replyWrite", method = RequestMethod.POST)

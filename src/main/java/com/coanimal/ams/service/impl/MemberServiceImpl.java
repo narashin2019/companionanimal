@@ -28,12 +28,7 @@ public class MemberServiceImpl implements MemberService {
     memberDao.register(member);
   }
 
-  // 로그인
-//  @Override
-//  public Member login(Member member) throws Exception {
-//    return memberDao.login(member);
-//  }
-  
+ 
   // Controller에서 보내는 파라미터들을 memberUpdate(Member member)로 받고
   // 받은 도메인을 DAO로 보내준다
   // 회원정보 변경
@@ -50,5 +45,12 @@ public class MemberServiceImpl implements MemberService {
     params.put("password", password);
     return memberDao.findByEmailAndPassword(params);
   }
+  
+  // 회원정보 조회 (마이페이지)
+  @Override
+  public Member userView(String email) throws Exception {
+    return memberDao.userView(email);
+  }
+  
 
 }

@@ -2,7 +2,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
+<style>
+.profile-userpic img {
+  float: none;
+  margin: 0 auto;
+  width: 50%;
+  height: 50%;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  border-radius: 50% !important;
+}
+</style>
 
 <script type="text/javascript">
   $(document).ready(function(){
@@ -12,13 +22,27 @@
   })
 </script>
 
+
 <div class="container">
-마이페이지 
+<form role="form" method="get">
 
-회원정보 보여주고
+		<div class="profile-userpic">
+		  <img src="http://keenthemes.com/preview/metronic/theme/assets/admin/pages/media/profile/profile_user.jpg" class="img-responsive" alt="">
+		</div>
 
-하단에 수정 버튼 넣어서 memberUpdate되도록 구현
+    <table class="table table-boardered">
+     <tr>
+       <th><label class="control-label" for="email">이메일</label></th>
+       <td>${loginUser.email}</td>        
+     </tr>
+     <tr>
+       <th><label class="control-label" for="nickname">닉네임</label></th>
+       <td>${loginUser.nickname}</td>        
+     </tr>
+    </table>
 
-<button id="memberUpdateBtn" type="button">회원정보수정</button>
+    <button id="memberUpdateBtn" type="button">회원정보수정</button>
 
+
+</form>
 </div>

@@ -53,6 +53,13 @@
       and password=password(#{password})
   </select>
   
+  <!-- 회원정보 조회 (마이페이지) -->
+  <select id="userView" resultMap="MemberMap" parameterType="string">
+	  SELECT email, nickname 
+	  FROM member
+	  WHERE email = #{email}
+  </select>
+  
 </mapper>
 
 

@@ -5,6 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.coanimal.ams.domain.Member;
@@ -54,40 +55,11 @@ public class MemberController {
       return "member/mypage";
   }
   
-  // 마이페이지 GET
-  @RequestMapping(value="/mypage", method = RequestMethod.GET)
-  public void mepageView() throws Exception{
+  // 회원정보 조회 (마이페이지) GET
+  @GetMapping("/mypage")
+  public String mypage() {
+    return "member/mypage";
   }
   
 }
 
-
-//// 로그인 GET
-//@RequestMapping(value = "/login", method = RequestMethod.GET)
-//public void login() throws Exception {
-//}
-//@RequestMapping(value = "/login", method = RequestMethod.POST)
-//public String login(Member member, HttpServletRequest req, RedirectAttributes rttr) throws Exception{
-//  logger.info("post login");
-//  
-//  HttpSession session = req.getSession();
-//  Member login = memberService.login(member);
-//  
-//  if(login == null) {
-//      session.setAttribute("member", null);
-//      rttr.addFlashAttribute("msg", false);
-//  }else {
-//      session.setAttribute("member", login);
-//  }
-//  System.out.println("세션받아와졌냐" + session);
-//  System.out.println("세션받아와졌냐" + login);
-//  return "redirect:/";
-//  // redirect:/로 리턴하면 index.html페이지가 나옴 // redirect:../home/home :
-//}
-//// 로그아웃
-//@RequestMapping(value = "/logout", method = RequestMethod.GET)
-//public String logout(HttpSession session) throws Exception{
-//  
-//  session.invalidate();
-//  return "redirect:/";
-//}

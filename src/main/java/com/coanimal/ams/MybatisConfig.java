@@ -1,5 +1,6 @@
 package com.coanimal.ams;
 
+
 import javax.sql.DataSource;
 import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -10,7 +11,6 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 // Spring IoC 컨테이너가 이 클래스를 Java Config로 자동 인식하려면
 // 다음 태그를 붙여야 한다.
 // 단, 이 클래스가 @ComponentScan 에서 지정한 패키지 안에 있어야 한다.
@@ -35,7 +35,7 @@ public class MybatisConfig {
   @Bean
   public SqlSessionFactory sqlSessionFactory(DataSource dataSource, // DB 커넥션풀
       ApplicationContext appCtx // Spring IoC 컨테이너
-  ) throws Exception {
+      ) throws Exception {
 
     // Mybatis의 log4j2 활성화시키기
     LogFactory.useLog4J2Logging();
@@ -51,5 +51,4 @@ public class MybatisConfig {
     return sqlSessionFactoryBean.getObject();
   }
 }
-
 

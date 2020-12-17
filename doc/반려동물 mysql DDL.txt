@@ -48,344 +48,335 @@ DROP TABLE IF EXISTS info_file RESTRICT;
 -- 회원
 DROP TABLE IF EXISTS member RESTRICT;
 
-///////////////////////////////////////////////////
-
 -- 산책친구게시글
 CREATE TABLE walk_board (
-  walk_no       INTEGER      NOT NULL COMMENT '산책친구게시글번호', -- 산책친구게시글번호
-  member_no     INTEGER      NULL     COMMENT '회원번호', -- 회원번호
-  walk_category VARCHAR(10)  NULL     COMMENT '카테고리', -- 카테고리
-  title         VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
-  content       TEXT         NOT NULL COMMENT '내용', -- 내용
-  create_date   DATETIME     NULL     DEFAULT now() COMMENT '작성일', -- 작성일
-  view_count    INTEGER      NOT NULL DEFAULT 0 COMMENT '조회수', -- 조회수
-  like_count    INTEGER      NULL     COMMENT '좋아요' -- 좋아요
+    walk_no       INTEGER      NOT NULL COMMENT '산책친구게시글번호', -- 산책친구게시글번호
+    member_no     INTEGER      NULL     COMMENT '회원번호', -- 회원번호
+    walk_category VARCHAR(10)  NULL     COMMENT '카테고리', -- 카테고리
+    title         VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
+    content       TEXT         NOT NULL COMMENT '내용', -- 내용
+    create_date   DATETIME     NULL     DEFAULT now() COMMENT '작성일', -- 작성일
+    view_count    INTEGER      NOT NULL DEFAULT 0 COMMENT '조회수', -- 조회수
+    like_count    INTEGER      NULL     COMMENT '좋아요' -- 좋아요
 )
 COMMENT '산책친구게시글';
 
 -- 산책친구게시글
 ALTER TABLE walk_board
-  ADD CONSTRAINT PK_walk_board -- 산책친구게시글 기본키
-    PRIMARY KEY (
-      walk_no -- 산책친구게시글번호
-    );
+    ADD CONSTRAINT PK_walk_board -- 산책친구게시글 기본키
+        PRIMARY KEY (
+            walk_no -- 산책친구게시글번호
+        );
 
 ALTER TABLE walk_board
-  MODIFY COLUMN walk_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '산책친구게시글번호';
+    MODIFY COLUMN walk_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '산책친구게시글번호';
 
 ALTER TABLE walk_board
-  AUTO_INCREMENT = 1;
+    AUTO_INCREMENT = 1;
 
 -- 산책친구댓글
 CREATE TABLE walk_reply (
-  walk_reply_no INTEGER  NOT NULL COMMENT '산책친구댓글번호', -- 산책친구댓글번호
-  content       TEXT     NOT NULL COMMENT '댓글내용', -- 댓글내용
-  walk_no       INTEGER  NOT NULL COMMENT '산책친구게시글번호', -- 산책친구게시글번호
-  member_no     INTEGER  NULL     COMMENT '회원번호', -- 회원번호
-  create_date   DATETIME NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
+    walk_reply_no INTEGER  NOT NULL COMMENT '산책친구댓글번호', -- 산책친구댓글번호
+    content       TEXT     NOT NULL COMMENT '댓글내용', -- 댓글내용
+    walk_no       INTEGER  NOT NULL COMMENT '산책친구게시글번호', -- 산책친구게시글번호
+    member_no     INTEGER  NULL     COMMENT '회원번호', -- 회원번호
+    create_date   DATETIME NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
 )
 COMMENT '산책친구댓글';
 
 -- 산책친구댓글
 ALTER TABLE walk_reply
-  ADD CONSTRAINT PK_walk_reply -- 산책친구댓글 기본키
-    PRIMARY KEY (
-      walk_reply_no -- 산책친구댓글번호
-    );
+    ADD CONSTRAINT PK_walk_reply -- 산책친구댓글 기본키
+        PRIMARY KEY (
+            walk_reply_no -- 산책친구댓글번호
+        );
 
 ALTER TABLE walk_reply
-  MODIFY COLUMN walk_reply_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '산책친구댓글번호';
+    MODIFY COLUMN walk_reply_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '산책친구댓글번호';
 
 ALTER TABLE walk_reply
-  AUTO_INCREMENT = 1;
+    AUTO_INCREMENT = 1;
 
 -- 산책친구첨부파일
 CREATE TABLE walk_file (
-  file_no   INTEGER     NOT NULL COMMENT '파일번호', -- 파일번호
-  walk_no   INTEGER     NULL     COMMENT '산책친구게시글번호', -- 산책친구게시글번호
-  file_name VARCHAR(40) NOT NULL COMMENT '파일이름', -- 파일이름
-  regdate   DATETIME    NOT NULL DEFAULT now() COMMENT '파일등록일' -- 파일등록일
+    file_no          INTEGER      NOT NULL COMMENT '파일번호', -- 파일번호
+    walk_no          INTEGER      NOT NULL COMMENT '산책게시판게시글번호', -- 산책게시판게시글번호
+    org_file_name    VARCHAR(260) NOT NULL DEFAULT now() COMMENT '원본파일이름', -- 원본파일이름
+    stored_fiel_name VARCHAR(40)  NOT NULL COMMENT '변경된파일이름', -- 변경된파일이름
+    regdate          DATETIME     NOT NULL COMMENT '파일등록일', -- 파일등록일
+    file_size        INTEGER      NULL     COMMENT '파일크기', -- 파일크기
+    del_gb           TINYINT(1)   NULL     COMMENT '삭제구분' -- 삭제구분
 )
 COMMENT '산책친구첨부파일';
 
 -- 산책친구첨부파일
 ALTER TABLE walk_file
-  ADD CONSTRAINT PK_walk_file -- 산책친구첨부파일 기본키
-    PRIMARY KEY (
-      file_no -- 파일번호
-    );
+    ADD CONSTRAINT PK_walk_file -- 산책친구첨부파일 기본키
+        PRIMARY KEY (
+            file_no -- 파일번호
+        );
 
 -- 일상게시글
 CREATE TABLE daily_board (
-  daily_no       INTEGER      NOT NULL COMMENT '일상게시글번호', -- 일상게시글번호
-  member_no      INTEGER      NULL     COMMENT '회원번호', -- 회원번호
-  daily_category VARCHAR(10)  NULL     COMMENT '카테고리', -- 카테고리
-  title          VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
-  content        TEXT         NOT NULL COMMENT '내용', -- 내용
-  create_date    DATETIME     NULL     DEFAULT now() COMMENT '작성일', -- 작성일
-  view_count     INTEGER      NOT NULL DEFAULT 0 COMMENT '조회수', -- 조회수
-  like_count     INTEGER      NULL     COMMENT '좋아요' -- 좋아요
+    daily_no       INTEGER      NOT NULL COMMENT '일상게시글번호', -- 일상게시글번호
+    member_no      INTEGER      NULL     COMMENT '회원번호', -- 회원번호
+    daily_category VARCHAR(10)  NULL     COMMENT '카테고리', -- 카테고리
+    title          VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
+    content        TEXT         NOT NULL COMMENT '내용', -- 내용
+    create_date    DATETIME     NULL     DEFAULT now() COMMENT '작성일', -- 작성일
+    view_count     INTEGER      NOT NULL DEFAULT 0 COMMENT '조회수', -- 조회수
+    like_count     INTEGER      NULL     COMMENT '좋아요' -- 좋아요
 )
 COMMENT '일상게시글';
 
 -- 일상게시글
 ALTER TABLE daily_board
-  ADD CONSTRAINT PK_daily_board -- 일상게시글 기본키
-    PRIMARY KEY (
-      daily_no -- 일상게시글번호
-    );
+    ADD CONSTRAINT PK_daily_board -- 일상게시글 기본키
+        PRIMARY KEY (
+            daily_no -- 일상게시글번호
+        );
 
 -- 일상댓글
 CREATE TABLE daily_reply (
-  daily_reply_no INTEGER  NOT NULL COMMENT '산책친구댓글번호', -- 산책친구댓글번호
-  content        TEXT     NOT NULL COMMENT '댓글내용', -- 댓글내용
-  daily_no       INTEGER  NOT NULL COMMENT '일상게시글번호', -- 일상게시글번호
-  member_no      INTEGER  NULL     COMMENT '회원번호', -- 회원번호
-  create_date    DATETIME NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
+    daily_reply_no INTEGER  NOT NULL COMMENT '산책친구댓글번호', -- 산책친구댓글번호
+    content        TEXT     NOT NULL COMMENT '댓글내용', -- 댓글내용
+    daily_no       INTEGER  NOT NULL COMMENT '일상게시글번호', -- 일상게시글번호
+    member_no      INTEGER  NULL     COMMENT '회원번호', -- 회원번호
+    create_date    DATETIME NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
 )
 COMMENT '일상댓글';
 
 -- 일상댓글
 ALTER TABLE daily_reply
-  ADD CONSTRAINT PK_daily_reply -- 일상댓글 기본키
-    PRIMARY KEY (
-      daily_reply_no -- 산책친구댓글번호
-    );
+    ADD CONSTRAINT PK_daily_reply -- 일상댓글 기본키
+        PRIMARY KEY (
+            daily_reply_no -- 산책친구댓글번호
+        );
 
 -- 일상첨부파일
 CREATE TABLE daily_file (
-  file_no   INTEGER     NOT NULL COMMENT '파일번호', -- 파일번호
-  daily_no  INTEGER     NULL     COMMENT '일상게시글번호', -- 일상게시글번호
-  file_name VARCHAR(40) NOT NULL COMMENT '파일이름', -- 파일이름
-  regdate   DATETIME    NOT NULL DEFAULT now() COMMENT '파일등록일' -- 파일등록일
+    file_no   INTEGER     NOT NULL COMMENT '파일번호', -- 파일번호
+    daily_no  INTEGER     NULL     COMMENT '일상게시글번호', -- 일상게시글번호
+    file_name VARCHAR(40) NOT NULL COMMENT '파일이름', -- 파일이름
+    regdate   DATETIME    NOT NULL DEFAULT now() COMMENT '파일등록일' -- 파일등록일
 )
 COMMENT '일상첨부파일';
 
 -- 일상첨부파일
 ALTER TABLE daily_file
-  ADD CONSTRAINT PK_daily_file -- 일상첨부파일 기본키
-    PRIMARY KEY (
-      file_no -- 파일번호
-    );
+    ADD CONSTRAINT PK_daily_file -- 일상첨부파일 기본키
+        PRIMARY KEY (
+            file_no -- 파일번호
+        );
 
 -- 정보공유게시글
 CREATE TABLE info_board (
-  info_no       INTEGER      NOT NULL COMMENT '정보공유게시글번호', -- 정보공유게시글번호
-  member_no     INTEGER      NULL     COMMENT '회원번호', -- 회원번호
-  info_category VARCHAR(10)  NULL     COMMENT '카테고리', -- 카테고리
-  title         VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
-  content       TEXT         NOT NULL COMMENT '내용', -- 내용
-  create_date   DATETIME     NULL     DEFAULT now() COMMENT '작성일', -- 작성일
-  view_count    INTEGER      NOT NULL DEFAULT 0 COMMENT '조회수', -- 조회수
-  like_count    INTEGER      NULL     COMMENT '좋아요' -- 좋아요
+    info_no       INTEGER      NOT NULL COMMENT '정보공유게시글번호', -- 정보공유게시글번호
+    member_no     INTEGER      NULL     COMMENT '회원번호', -- 회원번호
+    info_category VARCHAR(10)  NULL     COMMENT '카테고리', -- 카테고리
+    title         VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
+    content       TEXT         NOT NULL COMMENT '내용', -- 내용
+    create_date   DATETIME     NULL     DEFAULT now() COMMENT '작성일', -- 작성일
+    view_count    INTEGER      NOT NULL DEFAULT 0 COMMENT '조회수', -- 조회수
+    like_count    INTEGER      NULL     COMMENT '좋아요' -- 좋아요
 )
 COMMENT '정보공유게시글';
 
 -- 정보공유게시글
 ALTER TABLE info_board
-  ADD CONSTRAINT PK_info_board -- 정보공유게시글 기본키
-    PRIMARY KEY (
-      info_no -- 정보공유게시글번호
-    );
+    ADD CONSTRAINT PK_info_board -- 정보공유게시글 기본키
+        PRIMARY KEY (
+            info_no -- 정보공유게시글번호
+        );
 
 ALTER TABLE info_board
-  MODIFY COLUMN info_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '정보공유게시글번호';
+    MODIFY COLUMN info_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '정보공유게시글번호';
 
 ALTER TABLE info_board
-  AUTO_INCREMENT = 1;
+    AUTO_INCREMENT = 1;
 
 -- 정보공유댓글
 CREATE TABLE info_reply (
-  info_reply_no INTEGER  NOT NULL COMMENT '정보공유댓글번호', -- 정보공유댓글번호
-  content       TEXT     NOT NULL COMMENT '댓글내용', -- 댓글내용
-  info_no       INTEGER  NOT NULL COMMENT '정보공유게시글번호', -- 정보공유게시글번호
-  member_no     INTEGER  NULL     COMMENT '회원번호', -- 회원번호
-  create_date   DATETIME NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
+    info_reply_no INTEGER  NOT NULL COMMENT '정보공유댓글번호', -- 정보공유댓글번호
+    content       TEXT     NOT NULL COMMENT '댓글내용', -- 댓글내용
+    info_no       INTEGER  NOT NULL COMMENT '정보공유게시글번호', -- 정보공유게시글번호
+    member_no     INTEGER  NULL     COMMENT '회원번호', -- 회원번호
+    create_date   DATETIME NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
 )
 COMMENT '정보공유댓글';
 
 -- 정보공유댓글
 ALTER TABLE info_reply
-  ADD CONSTRAINT PK_info_reply -- 정보공유댓글 기본키
-    PRIMARY KEY (
-      info_reply_no -- 정보공유댓글번호
-    );
+    ADD CONSTRAINT PK_info_reply -- 정보공유댓글 기본키
+        PRIMARY KEY (
+            info_reply_no -- 정보공유댓글번호
+        );
 
 ALTER TABLE info_reply
-  MODIFY COLUMN info_reply_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '정보공유댓글번호';
+    MODIFY COLUMN info_reply_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '정보공유댓글번호';
 
 ALTER TABLE info_reply
-  AUTO_INCREMENT = 1;
+    AUTO_INCREMENT = 1;
 
 -- 정보공유첨부파일
 CREATE TABLE info_file (
-  file_no          INTEGER      NOT NULL COMMENT '파일번호', -- 파일번호
-  info_no          INTEGER      NOT NULL COMMENT '정보공유게시글번호', -- 정보공유게시글번호
-  org_file_name    VARCHAR(260) NOT NULL COMMENT '원본파일이름', -- 원본파일이름
-  stored_file_name VARCHAR(40)  NOT NULL COMMENT '변경된파일이름', -- 변경된파일이름
-  regdate          DATETIME     NOT NULL DEFAULT now() COMMENT '파일등록일', -- 파일등록일
-  file_size        INTEGER      NULL     COMMENT '파일크기', -- 파일크기
-  del_gb           TINYINT(1)   NULL     DEFAULT 0 COMMENT '삭제구분' -- 삭제구분
+    file_no          INTEGER      NOT NULL COMMENT '파일번호', -- 파일번호
+    info_no          INTEGER      NOT NULL COMMENT '정보공유게시글번호', -- 정보공유게시글번호
+    org_file_name    VARCHAR(260) NOT NULL COMMENT '원본파일이름', -- 원본파일이름
+    stored_file_name VARCHAR(40)  NOT NULL COMMENT '변경된파일이름', -- 변경된파일이름
+    regdate          DATETIME     NOT NULL DEFAULT now() COMMENT '파일등록일', -- 파일등록일
+    file_size        INTEGER      NULL     COMMENT '파일크기', -- 파일크기
+    del_gb           TINYINT(1)   NULL     DEFAULT 0 COMMENT '삭제구분' -- 삭제구분
 )
 COMMENT '정보공유첨부파일';
 
 -- 정보공유첨부파일
 ALTER TABLE info_file
-  ADD CONSTRAINT PK_info_file -- 정보공유첨부파일 기본키
-    PRIMARY KEY (
-      file_no -- 파일번호
-    );
+    ADD CONSTRAINT PK_info_file -- 정보공유첨부파일 기본키
+        PRIMARY KEY (
+            file_no -- 파일번호
+        );
 
 ALTER TABLE info_file
-  MODIFY COLUMN file_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '파일번호';
+    MODIFY COLUMN file_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '파일번호';
 
 ALTER TABLE info_file
-  AUTO_INCREMENT = 1;
+    AUTO_INCREMENT = 1;
 
 -- 회원
 CREATE TABLE member (
-  member_no   INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
-  email       VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
-  id_photo    VARCHAR(255) NULL     COMMENT '썸네일', -- 썸네일
-  password    VARCHAR(255) NOT NULL COMMENT '비밀번호', -- 비밀번호
-  nickname    VARCHAR(50)  NULL     COMMENT '닉네임', -- 닉네임
-  create_date DATETIME     NOT NULL DEFAULT now() COMMENT '가입일', -- 가입일
-  authkey     CHAR(30)     NULL     COMMENT '권한키', -- 권한키
-  authstatus  INTEGER      NOT NULL DEFAULT 0 COMMENT '권한상태' -- 권한상태
+    member_no   INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+    email       VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
+    id_photo    VARCHAR(255) NULL     COMMENT '썸네일', -- 썸네일
+    password    VARCHAR(255) NOT NULL COMMENT '비밀번호', -- 비밀번호
+    nickname    VARCHAR(50)  NULL     COMMENT '닉네임', -- 닉네임
+    create_date DATETIME     NOT NULL DEFAULT now() COMMENT '가입일', -- 가입일
+    authkey     CHAR(30)     NULL     COMMENT '권한키', -- 권한키
+    authstatus  INTEGER      NOT NULL DEFAULT 0 COMMENT '권한상태' -- 권한상태
 )
 COMMENT '회원';
 
 -- 회원
 ALTER TABLE member
-  ADD CONSTRAINT PK_member -- 회원 기본키
-    PRIMARY KEY (
-      member_no -- 회원번호
-    );
+    ADD CONSTRAINT PK_member -- 회원 기본키
+        PRIMARY KEY (
+            member_no -- 회원번호
+        );
 
 -- 회원 유니크 인덱스
 CREATE UNIQUE INDEX UIX_member
-  ON member ( -- 회원
-    email ASC -- 이메일
-  );
+    ON member ( -- 회원
+        email ASC -- 이메일
+    );
 
 -- 회원 유니크 인덱스2
 CREATE UNIQUE INDEX UIX_member2
-  ON member ( -- 회원
-    nickname ASC -- 닉네임
-  );
+    ON member ( -- 회원
+        nickname ASC -- 닉네임
+    );
 
 ALTER TABLE member
-  MODIFY COLUMN member_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '회원번호';
+    MODIFY COLUMN member_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '회원번호';
 
 ALTER TABLE member
-  AUTO_INCREMENT = 1;
+    AUTO_INCREMENT = 1;
 
 -- 산책친구게시글
 ALTER TABLE walk_board
-  ADD CONSTRAINT FK_member_TO_walk_board -- 회원 -> 산책친구게시글
-    FOREIGN KEY (
-      member_no -- 회원번호
-    )
-    REFERENCES member ( -- 회원
-      member_no -- 회원번호
-    );
+    ADD CONSTRAINT FK_member_TO_walk_board -- 회원 -> 산책친구게시글
+        FOREIGN KEY (
+            member_no -- 회원번호
+        )
+        REFERENCES member ( -- 회원
+            member_no -- 회원번호
+        );
 
 -- 산책친구댓글
 ALTER TABLE walk_reply
-  ADD CONSTRAINT FK_walk_board_TO_walk_reply -- 산책친구게시글 -> 산책친구댓글
-    FOREIGN KEY (
-      walk_no -- 산책친구게시글번호
-    )
-    REFERENCES walk_board ( -- 산책친구게시글
-      walk_no -- 산책친구게시글번호
-    );
+    ADD CONSTRAINT FK_walk_board_TO_walk_reply -- 산책친구게시글 -> 산책친구댓글
+        FOREIGN KEY (
+            walk_no -- 산책친구게시글번호
+        )
+        REFERENCES walk_board ( -- 산책친구게시글
+            walk_no -- 산책친구게시글번호
+        );
 
 -- 산책친구댓글
 ALTER TABLE walk_reply
-  ADD CONSTRAINT FK_member_TO_walk_reply -- 회원 -> 산책친구댓글
-    FOREIGN KEY (
-      member_no -- 회원번호
-    )
-    REFERENCES member ( -- 회원
-      member_no -- 회원번호
-    );
-
--- 산책친구첨부파일
-ALTER TABLE walk_file
-  ADD CONSTRAINT FK_walk_board_TO_walk_file -- 산책친구게시글 -> 산책친구첨부파일
-    FOREIGN KEY (
-      walk_no -- 산책친구게시글번호
-    )
-    REFERENCES walk_board ( -- 산책친구게시글
-      walk_no -- 산책친구게시글번호
-    );
+    ADD CONSTRAINT FK_member_TO_walk_reply -- 회원 -> 산책친구댓글
+        FOREIGN KEY (
+            member_no -- 회원번호
+        )
+        REFERENCES member ( -- 회원
+            member_no -- 회원번호
+        );
 
 -- 일상게시글
 ALTER TABLE daily_board
-  ADD CONSTRAINT FK_member_TO_daily_board -- 회원 -> 일상게시글
-    FOREIGN KEY (
-      member_no -- 회원번호
-    )
-    REFERENCES member ( -- 회원
-      member_no -- 회원번호
-    );
+    ADD CONSTRAINT FK_member_TO_daily_board -- 회원 -> 일상게시글
+        FOREIGN KEY (
+            member_no -- 회원번호
+        )
+        REFERENCES member ( -- 회원
+            member_no -- 회원번호
+        );
 
 -- 일상댓글
 ALTER TABLE daily_reply
-  ADD CONSTRAINT FK_daily_board_TO_daily_reply -- 일상게시글 -> 일상댓글
-    FOREIGN KEY (
-      daily_no -- 일상게시글번호
-    )
-    REFERENCES daily_board ( -- 일상게시글
-      daily_no -- 일상게시글번호
-    );
+    ADD CONSTRAINT FK_daily_board_TO_daily_reply -- 일상게시글 -> 일상댓글
+        FOREIGN KEY (
+            daily_no -- 일상게시글번호
+        )
+        REFERENCES daily_board ( -- 일상게시글
+            daily_no -- 일상게시글번호
+        );
 
 -- 일상댓글
 ALTER TABLE daily_reply
-  ADD CONSTRAINT FK_member_TO_daily_reply -- 회원 -> 일상댓글
-    FOREIGN KEY (
-      member_no -- 회원번호
-    )
-    REFERENCES member ( -- 회원
-      member_no -- 회원번호
-    );
+    ADD CONSTRAINT FK_member_TO_daily_reply -- 회원 -> 일상댓글
+        FOREIGN KEY (
+            member_no -- 회원번호
+        )
+        REFERENCES member ( -- 회원
+            member_no -- 회원번호
+        );
 
 -- 일상첨부파일
 ALTER TABLE daily_file
-  ADD CONSTRAINT FK_daily_board_TO_daily_file -- 일상게시글 -> 일상첨부파일
-    FOREIGN KEY (
-      daily_no -- 일상게시글번호
-    )
-    REFERENCES daily_board ( -- 일상게시글
-      daily_no -- 일상게시글번호
-    );
+    ADD CONSTRAINT FK_daily_board_TO_daily_file -- 일상게시글 -> 일상첨부파일
+        FOREIGN KEY (
+            daily_no -- 일상게시글번호
+        )
+        REFERENCES daily_board ( -- 일상게시글
+            daily_no -- 일상게시글번호
+        );
 
 -- 정보공유게시글
 ALTER TABLE info_board
-  ADD CONSTRAINT FK_member_TO_info_board -- 회원 -> 정보공유게시글
-    FOREIGN KEY (
-      member_no -- 회원번호
-    )
-    REFERENCES member ( -- 회원
-      member_no -- 회원번호
-    );
+    ADD CONSTRAINT FK_member_TO_info_board -- 회원 -> 정보공유게시글
+        FOREIGN KEY (
+            member_no -- 회원번호
+        )
+        REFERENCES member ( -- 회원
+            member_no -- 회원번호
+        );
 
 -- 정보공유댓글
 ALTER TABLE info_reply
-  ADD CONSTRAINT FK_info_board_TO_info_reply -- 정보공유게시글 -> 정보공유댓글
-    FOREIGN KEY (
-      info_no -- 정보공유게시글번호
-    )
-    REFERENCES info_board ( -- 정보공유게시글
-      info_no -- 정보공유게시글번호
-    );
+    ADD CONSTRAINT FK_info_board_TO_info_reply -- 정보공유게시글 -> 정보공유댓글
+        FOREIGN KEY (
+            info_no -- 정보공유게시글번호
+        )
+        REFERENCES info_board ( -- 정보공유게시글
+            info_no -- 정보공유게시글번호
+        );
 
 -- 정보공유댓글
 ALTER TABLE info_reply
-  ADD CONSTRAINT FK_member_TO_info_reply -- 회원 -> 정보공유댓글
-    FOREIGN KEY (
-      member_no -- 회원번호
-    )
-    REFERENCES member ( -- 회원
-      member_no -- 회원번호
-    );
+    ADD CONSTRAINT FK_member_TO_info_reply -- 회원 -> 정보공유댓글
+        FOREIGN KEY (
+            member_no -- 회원번호
+        )
+        REFERENCES member ( -- 회원
+            member_no -- 회원번호
+        );

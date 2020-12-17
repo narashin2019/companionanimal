@@ -1,6 +1,7 @@
 package com.coanimal.ams.dao;
 
 import java.util.List;
+import java.util.Map;
 import com.coanimal.ams.domain.SearchCriteria;
 import com.coanimal.ams.domain.Walk;
 
@@ -11,7 +12,11 @@ import com.coanimal.ams.domain.Walk;
 public interface WalkDao {
   public int insert(Walk walk) throws Exception;
 
+  // 리스트 + 검색 + 페이징
   public List<Walk> findAll(SearchCriteria scri) throws Exception;
+
+  // 리스트 + 검색 + 페이징 (총 게시글 갯수 구하기)
+  public int countWalkList(SearchCriteria scri) throws Exception;
 
   public Walk findByNo(int walkNo) throws Exception;
 
@@ -19,10 +24,20 @@ public interface WalkDao {
 
   public int delete(int walkNo) throws Exception;
 
-  //  키워드 검색
-  //  public List<Walk> findByKeyword(String keyword) throws Exception;
+  //public List<Walk> findByKeyword(String keyword) throws Exception;
 
-  //총 게시글 갯수 구하기
-  public int countWalkList(SearchCriteria scri) throws Exception;
+  // 첨부파일 업로드
+  public void insertFile(Map<String, Object> map) throws Exception;
 
+  // 첨부파일 조회
+  public List<Map<String, Object>> selectFileList(int walkNo) throws Exception;
+
+  // 첨부파일 다운로드
+  public Map<String, Object> selectFileWalk(Map<String, Object> map) throws Exception;
+
+  // 첨부파일 수정
+  public void updateFile(Map<String, Object> map) throws Exception;
+
+  // 게시물 조회수
+  public void plusCnt(int walkNo) throws Exception;
 }

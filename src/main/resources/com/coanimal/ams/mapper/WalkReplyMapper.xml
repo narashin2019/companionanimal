@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.coanimal.ams.dao.WalkReplyDao">
+
+  <resultMap type="WalkReply" id="WalkReplyMap">
+    <id column="walk_reply_no" property="walkReplyNo"/>
+    <result column="walk_no" property="walkNo"/>
+    <result column="content" property="content"/>
+    <result column="create_date" property="createDate"/>
+    <result column="member_no" property="memberNo"/>
+    <result column="nickname" property="nickname" />
+  </resultMap>
+  
+
+  <!-- 댓글 조회 -->
+  <select id="readReply" resultMap="WalkReplyMap">
+  SELECT
+      r.walk_reply_no,
+      m.nickname,
+      r.content,
+      r.create_date
+    FROM
+      walk_reply AS r 
+    LEFT JOIN member AS m ON r.member_no=m.member_no 
+    WHERE 
+      r.walk_no=#{walkNo}
+  </select>
+  
+  <!-- 댓글 작성 -->
+  <insert id="writeReply" parameterType="WalkReply" useGeneratedKeys="true" keyProperty="walkReplyNo">
+  INSERT INTO walk_reply(
+    walk_no,
+    content
+  )
+  VALUES(
+    #{walkNo},
+    #{content}
+  )
+  </insert>
+ 
+  <!-- 댓글 수정 -->
+  <update id="updateReply" parameterType="WalkReply">
+    UPDATE 
+      walk_reply 
+    SET 
+      content = #{content}
+    WHERE walk_reply_no = #{walkReplyNo}
+  </update>
+
+  <!-- 댓글 삭제 -->
+  <delete id="deleteReply" parameterType="WalkReply">
+    DELETE FROM walk_reply
+    WHERE walk_reply_no = #{walkReplyNo}
+  </delete>
+  
+  <!-- 선택된 댓글 조회 -->
+  <select id="selectReply" resultMap="WalkReplyMap" parameterType="int">
+    SELECT
+      r.walk_no,
+      r.walk_reply_no,
+      m.nickname,
+      r.content,
+      r.create_date
+    FROM
+      walk_reply AS r 
+    LEFT JOIN member AS m ON r.member_no=m.member_no 
+    WHERE 
+      r.walk_reply_no = #{walkReplyNo}
+  </select>
+
+  
+</mapper>
+
+
+
+
+
+
+

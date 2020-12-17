@@ -125,6 +125,18 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry sourcepath="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context-support/5.2.6.RELEASE/deb357e40fbe8b177f4160a1c8ba6ce461d708f/spring-context-support-5.2.6.RELEASE-sources.jar" kind="lib" path="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context-support/5.2.6.RELEASE/8a86089138a841c56c51540137b7554a7b9f3321/spring-context-support-5.2.6.RELEASE.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/javax.mail/mailapi/1.4.3/c84b0b9535d2ffe70b8323ba9a433e0a991fa411/mailapi-1.4.3-sources.jar" kind="lib" path="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/javax.mail/mailapi/1.4.3/124600e35d9031da50e5f67661ffa741541f8f6a/mailapi-1.4.3.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry sourcepath="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.javassist/javassist/3.26.0-GA/61e272d124cd95493e7d621ca9db1d46e7e4bb17/javassist-3.26.0-GA-sources.jar" kind="lib" path="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.javassist/javassist/3.26.0-GA/bb2890849968d8d8311ffba8c37b0ce16ce284dc/javassist-3.26.0-GA.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
@@ -137,13 +149,13 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry sourcepath="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/5.2.5.RELEASE/6ef9718e1ee121b1df6372722d30cc5a36bed8d9/spring-context-5.2.5.RELEASE-sources.jar" kind="lib" path="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/5.2.5.RELEASE/3aa9a6364151c9e37f18f78106fc6a32805333a6/spring-context-5.2.5.RELEASE.jar">
+	<classpathentry sourcepath="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/5.2.6.RELEASE/710c0b1a12af563b54d961eec9505b8e5dd399c/spring-context-5.2.6.RELEASE-sources.jar" kind="lib" path="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/5.2.6.RELEASE/f8f4420f268b054db12bf0dc7128adc09ab39a7/spring-context-5.2.6.RELEASE.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry sourcepath="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/5.2.5.RELEASE/5d889829b8a78ad6d521931ab93a3ce50e5aefc9/spring-aop-5.2.5.RELEASE-sources.jar" kind="lib" path="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/5.2.5.RELEASE/4438fdc9914d8fcf5033437c1e915b6f2d9cfb64/spring-aop-5.2.5.RELEASE.jar">
+	<classpathentry sourcepath="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/5.2.6.RELEASE/e182711d0def1d5bbe1431112425611115faf010/spring-aop-5.2.6.RELEASE-sources.jar" kind="lib" path="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/5.2.6.RELEASE/84fffb7cad5816763683a3f251f942aa9f667a7e/spring-aop-5.2.6.RELEASE.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
@@ -161,19 +173,19 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry sourcepath="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/5.2.5.RELEASE/4dbf89132cec7df1ab91fb21c3073cd5160a137c/spring-beans-5.2.5.RELEASE-sources.jar" kind="lib" path="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/5.2.5.RELEASE/6dd11f183d252605e5dae2552cd918b758390139/spring-beans-5.2.5.RELEASE.jar">
+	<classpathentry sourcepath="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/5.2.6.RELEASE/43bffce2b497174ae5278af163931ac0c82acb25/spring-beans-5.2.6.RELEASE-sources.jar" kind="lib" path="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/5.2.6.RELEASE/d1b4c338e52dac001a48e29a605bb8f73572ad84/spring-beans-5.2.6.RELEASE.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry sourcepath="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/5.2.5.RELEASE/826a67df1d5d11b73de6c1d8fb1afc784c99609c/spring-expression-5.2.5.RELEASE-sources.jar" kind="lib" path="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/5.2.5.RELEASE/b763ffd867d55a211e87734cc799513687a6c7bd/spring-expression-5.2.5.RELEASE.jar">
+	<classpathentry sourcepath="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/5.2.6.RELEASE/5db5f1785d0177163000932438e45166339b48d8/spring-expression-5.2.6.RELEASE-sources.jar" kind="lib" path="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/5.2.6.RELEASE/ae0bc9fdf6cf08d885b9aee26c21efa24245d46c/spring-expression-5.2.6.RELEASE.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry sourcepath="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/5.2.5.RELEASE/1aca0e9547833bd1fd4d9456fa8de27cab415ecc/spring-core-5.2.5.RELEASE-sources.jar" kind="lib" path="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/5.2.5.RELEASE/e207390ac307d282ed565db4df7046df04fc52b/spring-core-5.2.5.RELEASE.jar">
+	<classpathentry sourcepath="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/5.2.6.RELEASE/f7b178312f07bc61d61561e9b67a715aaaee95d1/spring-core-5.2.6.RELEASE-sources.jar" kind="lib" path="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/5.2.6.RELEASE/5533695a01f5a1163428932abf6c5ba70e837a2d/spring-core-5.2.6.RELEASE.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
@@ -299,13 +311,19 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry sourcepath="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-jcl/5.2.5.RELEASE/9ec1af0e054b0ee31aa6866831cf5979690c354e/spring-jcl-5.2.5.RELEASE-sources.jar" kind="lib" path="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-jcl/5.2.5.RELEASE/b841f30defd6508f0c21b8c5490b030eb50ac8cb/spring-jcl-5.2.5.RELEASE.jar">
+	<classpathentry sourcepath="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/javax.activation/activation/1.1/3697e9f67a2ed7ac5f589cff30f21173299440/activation-1.1-sources.jar" kind="lib" path="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/javax.activation/activation/1.1/e6cb541461c2834bdea3eb920f1884d1eb508b50/activation-1.1.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry sourcepath="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.apache.tiles/tiles-autotag-core-runtime/1.2/2bc940172452bddb7d705991edb266271b52b421/tiles-autotag-core-runtime-1.2-sources.jar" kind="lib" path="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.apache.tiles/tiles-autotag-core-runtime/1.2/100bd3cae1a5debf9afb4ef5c8b36c508d06326/tiles-autotag-core-runtime-1.2.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-jcl/5.2.6.RELEASE/eedaf73c4fe7dc66dc4d7818a07545150b223097/spring-jcl-5.2.6.RELEASE-sources.jar" kind="lib" path="C:/Users/yyhgo/.gradle/caches/modules-2/files-2.1/org.springframework/spring-jcl/5.2.6.RELEASE/47b092c5c7a97ad330ae29d84d64e42c63a11b7a/spring-jcl-5.2.6.RELEASE.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>

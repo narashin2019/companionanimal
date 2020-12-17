@@ -2,11 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<html>
-<head>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<title>정보/공구게시판</title>
-</head>
+
 
   <script type="text/javascript">
     $(document).ready(function(){
@@ -23,11 +19,8 @@
     })
     
   </script>
-  <body>
-  
-    <div id="root">
-      
-      <section id="container">
+
+    <div class="container">
         <form name="updateForm" role="form" method="post" action="replyDelete">
           <input type="hidden" name="infoNo" value="${replyDelete.infoNo}" readonly="readonly"/>
           <input type="hidden" id="infoReplyNo" name="infoReplyNo" value="${replyDelete.infoReplyNo}" />
@@ -42,7 +35,4 @@
             <button type="button" class="cancel_btn">아니오. 삭제하지 않습니다.</button>
           </div>
         </form>
-      </section>
     </div>
-  </body>
-</html>

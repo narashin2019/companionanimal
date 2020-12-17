@@ -94,5 +94,10 @@ compile group: 'javax.inject', name: 'javax.inject', version: '1'
   implementation 'com.google.guava:guava:28.1-jre'
   testImplementation 'junit:junit:4.12'
 
+
+//메일처리
+  implementation 'org.springframework:spring-context-support:5.2.6.RELEASE'
+  
+  implementation 'javax.mail:mailapi:1.4.3'
 }
 

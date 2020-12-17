@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<!-- 20201207 -->
+<!-- 20201215 -->
 <mapper namespace="com.coanimal.ams.dao.MemberDao">
 
   <resultMap type="Member" id="MemberMap">
@@ -13,8 +13,8 @@
     <result column="password"  property="password"/>
     <result column="nickname"  property="nickname"/>
     <result column="create_date"  property="createDate"/>
-    <result column="userkey"  property="userkey"/>
-    <result column="loginmethod"  property="loginmethod"/>
+    <result column="authkey"  property="authkey"/>
+    <result column="authstatus"  property="authstatus"/>
   </resultMap>
   
   <!-- 회원가입 -->
@@ -23,28 +23,38 @@
       email, 
       password, 
       nickname, 
-      id_photo,
-      loginmethod
+      id_photo
     ) values(
       #{email},
       password(#{password}),
       #{nickname},
-      #{id_photo},
-      #{loginmethod}
+      #{idPhoto}
     )
   </insert>
   
-  <!-- 로그인 -->
-  <select id="login" resultType="member">
-    select
-      email,
-      password
+  <!-- 회원정보 수정 -->
+  <update id="memberUpdate">
+    UPDATE member SET 
+      nickname = #{nickname},
+      password = password(#{password}),
+      id_photo = #{idPhoto}
+    WHERE email = #{email}
+  </update>
+
+
+  <!-- 로그인 (아이디 패스워드 일치 확인) -->
+   <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="map">
+    select 
+      email, 
+      password, 
+      nickname, 
+      id_photo
     from member
-    where email = #{email}
-    and password = #{password}
+    where 
+      email=#{email} 
+      and password=password(#{password})
   </select>
-
-
+  
 </mapper>
 
 

@@ -32,14 +32,16 @@ public class AppWebApplicationInitializer
     };
   }
 
+  // /app/* 으로 된 url을 디스패처서블랫이 매핑한다.
   @Override
   protected String[] getServletMappings() {
     return new String[] {"/app/*"};
   }
+  
 
   @Override
   protected String getServletName() {
-    return "app1";
+    return "app";
   }
 
 

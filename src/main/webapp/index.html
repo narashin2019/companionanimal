@@ -1,46 +1,79 @@
+
 <!DOCTYPE html>
+
+
 <html>
+
 <head>
-<meta charset="UTF-8">
+<meta charset='UTF-8'>
+
+<!-- 파비콘생기면 넣는 곳 -->
+<link rel="icon" type="image/png" href="images/favicon.ico">
+
+<!-- 웹사이트 탭 제목 -->
 <title>반려동물 커뮤니티</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<!-- 참고 - 절대경로로 나중에 다 바꾸기
+<link rel="stylesheet" href="${pageContext.servletContext.getContextPath()}/css/bootstrap.min.css" />
+ -->
+ 
+<!-- css폴더에 있는 스타일/타일즈설정되어있음 -->
+<link rel='stylesheet' href='<tiles:getAsString name="css.common"/>'>
+ 
+<!-- 부트스트랩 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- 부트스트랩 CSS 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<!-- 제이쿼리 -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ 
 </head>
+
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="app/info/list">정보/공구</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="app/walk/list">산책친구</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="app/member/list">일상공유</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">마이페이지</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="app/member/login">로그인</a>
-      </li>
-            <li class="nav-item">
-        <a class="nav-link" href="app/member/register">회원가입</a>
-      </li>
-    </ul>
-  </div>
-</nav>
 
-<h1>반려동물 커뮤니티</h1>
+<div>
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="app/info/list">정보/공구</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="app/walk/list">산책친구</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="app/daily/list">일상공유</a>
+    </li>
+    
+
+<c:if test="${empty loginUser}">
+  <a href='app/auth/login' class='btn btn-success btn-sm'>로그인</a>
+  <a href='app/member/register' class='btn btn-success btn-sm'>회원가입</a>
+</c:if> 
+
+<c:if test="${not empty loginUser}">
+  <span class='navbar-text'>${loginUser.nickname}</span>
+  <a href='app/member/mypage' class='btn btn-success btn-sm'>마이페이지</a>
+  <a href='app/auth/logout' class='btn btn-success btn-sm'>로그아웃</a>
+</c:if>
+
+  </ul>
+</div>
+
+<br>
+<br>
+
+<h1> 반려동물 커뮤니티 / 메인화면 - 게시판 최신글로 구성 / index.html</h1>
+
+<br>
+<br>
 
 
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<footer>
+ 푸터
+</footer>
+
+
 </body>
 </html>

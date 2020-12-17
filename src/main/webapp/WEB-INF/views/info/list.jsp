@@ -4,20 +4,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<html>
-  <head>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <title>정보/공구게시판</title>
-  </head>
-  
-  <style type="text/css">
-      li {list-style: none; float: left; padding: 6px;}
-  </style>
 
-  <body>
-  <section id="container">
+    
+<div class="container">
   
-  <form role="form" method="get">
+<form role="form" method="get">
 
 <div>
   <table border='1'>
@@ -49,15 +40,15 @@
 <div>
 <ul>
     <c:if test="${pageMaker.prev}">
-      <li><a href="list${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
+      <li id="page"><a href="list${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
     </c:if> 
 
     <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-      <li><a href="list${pageMaker.makeSearch(idx)}">${idx}</a></li>
+      <li id="page"><a href="list${pageMaker.makeSearch(idx)}">${idx}</a></li>
     </c:forEach>
 
     <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-      <li><a href="list${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
+      <li id="page"><a href="list${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
     </c:if> 
 </ul>
 
@@ -79,7 +70,7 @@
 
     <button id="searchBtn" type="button">검색</button>
     
-    <script>
+    <script  type="text/javascript">
       $(function(){
         $('#searchBtn').click(function() {
           self.location = "list" + '${pageMaker.makeQuery(1)}' + "&searchType=" + $("select option:selected").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val());
@@ -94,6 +85,4 @@
   
   
 </form>
-  </section>
-  </body>
-</html>
+</div>

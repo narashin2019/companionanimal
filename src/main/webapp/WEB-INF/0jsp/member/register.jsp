@@ -17,10 +17,8 @@
   <script type="text/javascript">
     $(document).ready(function(){
       // 취소 버튼
-      $(".cencle").on("click", function(){
-        
-        location.href = "login";
-                
+      $("#cancle").on("click", function(){
+        location.href = "http://localhost:9999/companionanimal/";
       })
     
       $("#submit").on("click", function(){
@@ -43,7 +41,7 @@
   <body>
     <section id="container">
       
-      <form action="register" method="post">
+      <form name='registerForm' action='register' method='post'>
       
         <div class="form-group has-feedback">
           <label class="control-label" for="email">이메일</label>
@@ -61,14 +59,18 @@
           <label class="control-label" for="idPhoto">프로필사진</label>
           <input class="form-control" type="text" id="idPhoto" name="idPhoto" />
         </div>
+  
+
+        
+     <!--    
         <div class="form-group has-feedback">
           <label class="control-label" for="loginmethod">로그인메소드</label>
           <input class="form-control" type="text" id="loginmethod" name="loginmethod" />
         </div>
-        
+      -->
         <div class="form-group has-feedback">
           <button class="btn btn-success" type="submit" id="submit">회원가입</button>
-          <button class="cencle btn btn-danger" type="button">취소</button>
+          <button class="cancle btn btn-danger" type="button" id="cancle">취소</button>
         </div>
       </form>
     </section>

@@ -10,6 +10,7 @@ import com.coanimal.ams.domain.SearchCriteria;
 // 메서드 호출 규칙을 정의한다.
 //
 public interface InfoDao {
+  
   public int insert(Info info) throws Exception;
 
   // 리스트 + 검색 + 페이징

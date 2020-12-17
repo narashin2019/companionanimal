@@ -1,15 +1,23 @@
 package com.coanimal.ams.web;
 
+import java.io.File;
+import java.util.UUID;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 import com.coanimal.ams.domain.Member;
 import com.coanimal.ams.service.MemberService;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.name.Rename;
 
 //20201215
 
@@ -18,6 +26,10 @@ import com.coanimal.ams.service.MemberService;
 public class MemberController {
   
   static Logger logger = LogManager.getLogger(MemberController.class);
+
+  // 파일첨부할때 씀
+  @Autowired
+  ServletContext servletContext;
 
   @Autowired
   MemberService memberService;
@@ -34,25 +46,36 @@ public class MemberController {
   // 회원가입 POST
   @RequestMapping(value = "/register", method = RequestMethod.POST)
   public String postRegister(Member member) throws Exception {
-      System.out.println("member"+ member);
       memberService.register(member);
-      
       return "redirect:../auth/login";
   }
   
   // 회원정보 수정 GET
-  @RequestMapping(value="/memberUpdateView", method = RequestMethod.GET)
-  public void registerUpdateView() throws Exception{
+  @RequestMapping(value="/memberUpdateForm", method = RequestMethod.GET)
+  public void memberUpdateForm() throws Exception{
   }
 
   // 회원정보 수정 POST
   @RequestMapping(value="/memberUpdate", method = RequestMethod.POST)
-  public String registerUpdate(Member member, HttpSession session) throws Exception{
+  public String memberUpdate(Member member, HttpSession session, @RequestPart(value = "photo", required = false) MultipartFile photo) throws Exception{
+    
+    String dirPath = servletContext.getRealPath("/upload/member");
+    String filename = UUID.randomUUID().toString();
+    
+    photo.transferTo(new File(dirPath + "/" + filename));
+    
+    Thumbnails.of(dirPath + "/" + filename).size(160, 160).outputFormat("jpg")
+    .toFiles(Rename.PREFIX_DOT_THUMBNAIL);
+    
+    member.setIdPhoto(filename);
+
+    memberService.memberUpdate(member);
+    
+    session.removeAttribute("loginUser");
+    session.setAttribute("loginUser", memberService.userView(member.getEmail()));
+    
+    return "redirect:../member/mypage";
       
-      memberService.memberUpdate(member);
-      session.invalidate();
-      
-      return "member/mypage";
   }
   
   // 회원정보 조회 (마이페이지) GET

@@ -2,22 +2,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<style>
-.profile-userpic img {
-  float: none;
-  margin: 0 auto;
-  width: 50%;
-  height: 50%;
-  -webkit-border-radius: 50% !important;
-  -moz-border-radius: 50% !important;
-  border-radius: 50% !important;
-}
-</style>
 
 <script type="text/javascript">
   $(document).ready(function(){
     $("#memberUpdateBtn").on("click", function(){
-      location.href="../member/memberUpdateView";
+      location.href="../member/memberUpdateForm";
     })
   })
 </script>
@@ -26,9 +15,16 @@
 <div class="container">
 <form role="form" method="get">
 
-		<div class="profile-userpic">
-		  <img src="http://keenthemes.com/preview/metronic/theme/assets/admin/pages/media/profile/profile_user.jpg" class="img-responsive" alt="">
-		</div>
+<c:if test="${empty loginUser.idPhoto}">
+	<div class="idPhotoDefault">
+	<img src="${pageContext.servletContext.contextPath}/upload/member/default.jpg" width="200" height="200">
+	</div>
+</c:if>		 
+
+<c:if test="${not empty loginUser.idPhoto && loginUser.idPhoto ne 'undefined'}">
+  <span><img src='${pageContext.servletContext.contextPath}/upload/member/thumbnail.${loginUser.idPhoto}.jpg' ></span>
+</c:if>
+
 
     <table class="table table-boardered">
      <tr>

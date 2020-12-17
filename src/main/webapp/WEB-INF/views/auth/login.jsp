@@ -27,13 +27,7 @@
     </form>
   </c:if>
 
-  <c:if test="${not empty loginUser}">
-    <p>${loginUser.nickname}님</p>
-  </c:if>
-
-<!-- 찾아서 코드 넣기 컨트롤러 -->
-  <c:if test="${msg == false}">
-    <p style="color: red;">로그인 실패! 아이디와 비밀번호 확인해주세요.</p>
-  </c:if>
   
 </div>
+
+

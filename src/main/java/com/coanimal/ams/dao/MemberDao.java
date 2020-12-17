@@ -9,9 +9,6 @@ public interface MemberDao {
   // 회원가입
   public void register(Member member) throws Exception;
   
-  // 로그인
-  //public Member login(Member member) throws Exception;
-  
   //회원정보 수정
   public void memberUpdate(Member member)throws Exception;
   
@@ -20,6 +17,9 @@ public interface MemberDao {
   
   // 회원정보 조회 (마이페이지)
   public Member userView(String email) throws Exception;
+  
+  
+
 }
 
 

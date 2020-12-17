@@ -34,7 +34,7 @@
 <div class="col-sm-6">
 <h2>회원가입</h2>
     
-  <form action='register' method='post' enctype='multipart/form-data'>
+  <form action='register' method='post'>
     <table class="table table-boardered">
      <tr>
        <th><label class="control-label" for="email">이메일</label></th>
@@ -51,7 +51,7 @@
      </tr>
      -->  
      <tr>
-       <th><label class="control-label" for="nickname">닉네임</label></th>
+     <th><label class="control-label" for="nickname">닉네임</label></th>
        <td><input class="form-control"  type="text" id="nickname" name="nickname" placeholder="닉네임을 입력하세요"></td>        
      </tr>
     </table>

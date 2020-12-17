@@ -39,7 +39,7 @@ public class MemberServiceImpl implements MemberService {
   
   //로그인 (아이디 패스워드 일치 확인)
   @Override
-  public Member get(String email, String password) throws Exception {
+  public Member findByEmailAndPassword(String email, String password) throws Exception {
     HashMap<String, Object> params = new HashMap<>();
     params.put("email", email);
     params.put("password", password);

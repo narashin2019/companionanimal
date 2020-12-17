@@ -10,6 +10,11 @@
 <head>
 
   <meta charset="utf-8">
+  
+  <c:if test="${not empty refreshUrl}">
+  <meta http-equiv="Refresh" content="${refreshUrl}">
+  </c:if>
+
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -30,7 +35,6 @@
 	<script src="${pageContext.servletContext.getContextPath()}/js/jquery.min.js" type="text/javascript"></script>
 	<script src="${pageContext.servletContext.getContextPath()}/js/bootstrap.bundle.min.js" type="text/javascript"></script>
   
-
 </head>
 
 <body>

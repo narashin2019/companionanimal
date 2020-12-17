@@ -10,19 +10,21 @@ public class Member implements Serializable {
 
   private int memberNo;
   private String email;
-  private String idPhoto;
   private String password;
   private String nickname;
   private Date createdDate;
   private String authkey;
   private int authstatus;
+  private String idPhoto;
+  
   
   @Override
   public String toString() {
-    return "Member [memberNo=" + memberNo + ", email=" + email + ", idPhoto=" + idPhoto
-        + ", password=" + password + ", nickname=" + nickname + ", createdDate=" + createdDate
-        + ", authkey=" + authkey + ", authstatus=" + authstatus + "]";
+    return "Member [memberNo=" + memberNo + ", email=" + email + ", password=" + password
+        + ", nickname=" + nickname + ", createdDate=" + createdDate + ", authkey=" + authkey
+        + ", authstatus=" + authstatus + ", idPhoto=" + idPhoto + "]";
   }
+
 
   @Override
   public int hashCode() {
@@ -38,6 +40,7 @@ public class Member implements Serializable {
     result = prime * result + ((password == null) ? 0 : password.hashCode());
     return result;
   }
+
 
   @Override
   public boolean equals(Object obj) {
@@ -85,71 +88,85 @@ public class Member implements Serializable {
     return true;
   }
 
+
   public int getMemberNo() {
     return memberNo;
   }
+
 
   public void setMemberNo(int memberNo) {
     this.memberNo = memberNo;
   }
 
+
   public String getEmail() {
     return email;
   }
+
 
   public void setEmail(String email) {
     this.email = email;
   }
 
-  public String getIdPhoto() {
-    return idPhoto;
-  }
-
-  public void setIdPhoto(String idPhoto) {
-    this.idPhoto = idPhoto;
-  }
 
   public String getPassword() {
     return password;
   }
 
+
   public void setPassword(String password) {
     this.password = password;
   }
+
 
   public String getNickname() {
     return nickname;
   }
 
+
   public void setNickname(String nickname) {
     this.nickname = nickname;
   }
+
 
   public Date getCreatedDate() {
     return createdDate;
   }
 
+
   public void setCreatedDate(Date createdDate) {
     this.createdDate = createdDate;
   }
+
 
   public String getAuthkey() {
     return authkey;
   }
 
+
   public void setAuthkey(String authkey) {
     this.authkey = authkey;
   }
+
 
   public int getAuthstatus() {
     return authstatus;
   }
 
+
   public void setAuthstatus(int authstatus) {
     this.authstatus = authstatus;
   }
-  
-  
-  
 
+
+  public String getIdPhoto() {
+    return idPhoto;
+  }
+
+
+  public void setIdPhoto(String idPhoto) {
+    this.idPhoto = idPhoto;
+  }
+  
+  
 }

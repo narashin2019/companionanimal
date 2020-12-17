@@ -31,7 +31,7 @@
   </insert>
   
   <!-- 회원정보 수정 -->
-  <update id="memberUpdate">
+  <update id="memberUpdate" parameterType="Member">
     UPDATE member SET 
       nickname = #{nickname},
       password = password(#{password}),
@@ -55,7 +55,7 @@
   
   <!-- 회원정보 조회 (마이페이지) -->
   <select id="userView" resultMap="MemberMap" parameterType="string">
-	  SELECT email, nickname 
+	  SELECT email, nickname, password, id_photo
 	  FROM member
 	  WHERE email = #{email}
   </select>

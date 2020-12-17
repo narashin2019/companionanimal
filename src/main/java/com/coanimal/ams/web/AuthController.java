@@ -52,7 +52,7 @@ public class AuthController {
     }
     response.addCookie(cookie);
 
-    Member member = memberService.get(email, password);
+    Member member = memberService.findByEmailAndPassword(email, password);
     if (member != null) {
       session.setAttribute("loginUser", member);
       model.addAttribute("refreshUrl", "2;url=../../");
@@ -61,15 +61,15 @@ public class AuthController {
       model.addAttribute("refreshUrl", "2;url=login");
     }
 
-    // 리턴값은 "redirect:../../index.jsp" 또는 "redirect:../../" 만 된다. 
-    // "redirect:../../index" 는 안된다. 컨트롤러가 있어도 /app/* 설정이 되어 있어서
-    return "redirect:../../";
+    return "auth/loginResult";
   }
 
   // 로그아웃 : 세션만 끊어주면 된다.
   @GetMapping("logout")
   public String logout(HttpSession session) {
     session.invalidate();
+    // 리턴값은 "redirect:../../index.jsp" 또는 "redirect:../../" 만 된다. 
+    // "redirect:../../index" 는 안된다. 컨트롤러가 있어도 /app/* 설정이 되어 있어서
     return "redirect:../../";
   }
 

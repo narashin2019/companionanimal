@@ -200,4 +200,3 @@ public class Walk implements Serializable {
 
 
 }
-

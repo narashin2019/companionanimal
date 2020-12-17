@@ -36,7 +36,7 @@ public class MemberController {
       System.out.println("member"+ member);
       memberService.register(member);
       
-      return "redirect:/";
+      return "redirect:../auth/login";
   }
   
   // 회원정보 수정 GET

@@ -22,13 +22,11 @@
     insert into member(
       email, 
       password, 
-      nickname, 
-      id_photo
+      nickname
     ) values(
       #{email},
       password(#{password}),
-      #{nickname},
-      #{idPhoto}
+      #{nickname}
     )
   </insert>
   

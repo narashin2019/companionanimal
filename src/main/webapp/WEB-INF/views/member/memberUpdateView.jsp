@@ -40,7 +40,7 @@
       </div>
       <div class="form-group has-feedback">
         <label class="control-label" for="idPhoto">프로필사진</label>
-        <input class="form-control" type="text" id="idPhoto" name="idPhoto" value="${member.idPhoto}"/>
+        <input class="form-control" type="file" id="idPhoto" name="idPhoto" value="${member.idPhoto}"/>
       </div>
       <div class="form-group has-feedback">
         <button class="btn btn-success" type="submit" id="submit">회원정보수정</button>

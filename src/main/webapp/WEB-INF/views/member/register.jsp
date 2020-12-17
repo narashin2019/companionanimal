@@ -27,28 +27,43 @@
 
 
 <div class="container">
-      <form action='register' method='post' enctype='multipart/form-data'>
-        <div class="form-group has-feedback">
-          <label class="control-label" for="email">이메일</label>
-          <input class="form-control" type="email" id="email" name="email">
-        </div>
-        <div class="form-group has-feedback">
-          <label class="control-label" for="password">패스워드</label>
-          <input class="form-control" type="password" id="password" name="password" />
-        </div>
-        <div class="form-group has-feedback">
-          <label class="control-label" for="nickname">닉네임</label>
-          <input class="form-control" type="text" id="nickname" name="nickname">
-        </div>
-        <div class="form-group has-feedback">
-          <label class="control-label" for="idPhoto">프로필사진</label>
-          <input class="form-control" type="file" id="idPhoto" name="idPhoto">
-        </div>
-        
-        <div class="form-group has-feedback">
-          <button class="btn btn-success" type="submit" id="submit">회원가입</button>
-          <button class="cancel btn btn-danger" type="button">취소</button>
-        </div>
-      </form>
+<div class="row">
+<div class="col-sm-12 text-center" >
+<div class="col-sm-3">
+</div>
+<div class="col-sm-6">
+<h2>회원가입</h2>
+    
+  <form action='register' method='post' enctype='multipart/form-data'>
+    <table class="table table-boardered">
+     <tr>
+       <th><label class="control-label" for="email">이메일</label></th>
+       <td><input class="form-control" type="email" id="email" name="email" placeholder="이메일을 넣으세요"></td>        
+     </tr>
+     <tr>
+       <th><label class="control-label" for="password">비밀번호</label></th>
+       <td><input class="form-control"  type="password" id="password" name="password" placeholder="비밀번호를 넣으세요"></td>        
+     </tr>
+     <!-- 비밀번호 확인
+     <tr>
+       <th><label class="control-label" for="password">비밀번호</label></th>
+       <td><input class="form-control"  type="password" id="password" name="password" placeholder="비밀번호를 확인하세요"></td>        
+     </tr>
+     -->  
+     <tr>
+       <th><label class="control-label" for="nickname">닉네임</label></th>
+       <td><input class="form-control"  type="text" id="nickname" name="nickname" placeholder="닉네임을 입력하세요"></td>        
+     </tr>
+    </table>
+  
+	  <div>
+		<button class="btn btn-success" type="submit" id="submit">회원가입</button>
+		<button class="cancel btn btn-danger" type="button">취소</button>
+	  </div>
+	  
+  </form>
+</div>
+</div>
+</div>
 </div>
   

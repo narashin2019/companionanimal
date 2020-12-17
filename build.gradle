@@ -99,5 +99,8 @@ compile group: 'javax.inject', name: 'javax.inject', version: '1'
   implementation 'org.springframework:spring-context-support:5.2.6.RELEASE'
   
   implementation 'javax.mail:mailapi:1.4.3'
+  
+  // Resource 라이브러리
+  compile group: 'javax.annotation', name: 'javax.annotation-api', version: '1.3.2'
 }
 

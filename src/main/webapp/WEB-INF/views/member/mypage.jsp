@@ -22,7 +22,9 @@
 </c:if>		 
 
 <c:if test="${not empty loginUser.idPhoto && loginUser.idPhoto ne 'undefined'}">
-  <span><img src='${pageContext.servletContext.contextPath}/upload/member/thumbnail.${loginUser.idPhoto}.jpg' ></span>
+  <div class="idPhoto">
+  <img src='${pageContext.servletContext.contextPath}/upload/member/thumbnail.${loginUser.idPhoto}.jpg' >
+  </div>
 </c:if>
 
 

@@ -9,7 +9,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -59,17 +58,27 @@ public class MemberController {
   @RequestMapping(value="/memberUpdate", method = RequestMethod.POST)
   public String memberUpdate(Member member, HttpSession session, @RequestPart(value = "photo", required = false) MultipartFile photo) throws Exception{
     
-    String dirPath = servletContext.getRealPath("/upload/member");
-    String filename = UUID.randomUUID().toString();
-    
-    photo.transferTo(new File(dirPath + "/" + filename));
-    
-    Thumbnails.of(dirPath + "/" + filename).size(160, 160).outputFormat("jpg")
-    .toFiles(Rename.PREFIX_DOT_THUMBNAIL);
-    
-    member.setIdPhoto(filename);
+    System.out.println("멤버아이디포토 =" + member.getIdPhoto()); // 입력화면에서 넘기는 것이 있으면 null아님 사진변경을 하지 않으면 null
+   
+    // 그러나 null로 비교하지 말고 파일네임이나 파일 사이즈로 비교해야 한다. 
+    if (photo.getOriginalFilename() !=null && photo.getOriginalFilename() != "") {
+      String dirPath = servletContext.getRealPath("/upload/member");
+      String filename = UUID.randomUUID().toString();
+      
+      photo.transferTo(new File(dirPath + "/" + filename));
+      
+      Thumbnails.of(dirPath + "/" + filename).size(160, 160).outputFormat("jpg")
+      .toFiles(Rename.PREFIX_DOT_THUMBNAIL);
+      
+      member.setIdPhoto(filename);
+      System.out.println("1 = " + member.getIdPhoto());//사진 변경 없을 시 null 값이 나옴
+    } 
 
+    System.out.println("2 = " + member.getIdPhoto()); //사진 변경 없을 시 null 값이 나옴
+    
+    
     memberService.memberUpdate(member);
+    System.out.println("3 = " +member.getIdPhoto()); //사진 변경 없을 시 null 값이 나옴
     
     session.removeAttribute("loginUser");
     session.setAttribute("loginUser", memberService.userView(member.getEmail()));

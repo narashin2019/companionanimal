@@ -116,7 +116,6 @@ public class InfoController {
     logger.info("update");
    
     infoService.update(info, files, fileNames, mpRequest); 
-    System.out.println("파일스 파일네임스 jsp에서 받아왔나 확인");
     System.out.println(files);
     System.out.println(fileNames);
     

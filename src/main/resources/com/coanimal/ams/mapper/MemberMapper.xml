@@ -32,10 +32,12 @@
   
   <!-- 회원정보 수정 -->
   <update id="memberUpdate" parameterType="Member">
-    UPDATE member SET 
-      nickname = #{nickname},
-      password = password(#{password}),
-      id_photo = #{idPhoto}
+    UPDATE member 
+    <set> 
+      <if test="nickname != null and nickname != ''">nickname = #{nickname},</if>
+      <if test="password != null and password != ''">password = password(#{password}),</if>
+      <if test="idPhoto != null and idPhoto != ''">id_photo = #{idPhoto}</if>
+    </set>
     WHERE email = #{email}
   </update>
 

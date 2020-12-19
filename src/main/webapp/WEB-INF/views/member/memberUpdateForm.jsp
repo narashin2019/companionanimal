@@ -13,9 +13,9 @@ $(document).ready(function(){
     console.log("취소버튼눌러서 마이페이지로")
   })
 
-  $(".submit").on("click", function(){
+  $("#submit").on("click", function(){
 	  console.log(" submit버튼 클릭함")
-	  if($("password").val()==""){
+	  if($("#password").val()==""){
       alert("비밀번호를 입력해주세요.");
       $("#password").focus();
       console.log("비밀번호 없다고 걸러냄")
@@ -38,7 +38,7 @@ $(document).ready(function(){
 </div>
 <div class="col-sm-6">
 <h2>회원정보수정</h2>
-  <form action='memberUpdate' method='post' enctype="multipart/form-data">
+  <form name='memberUpdateForm' action='memberUpdate' method='post' enctype="multipart/form-data">
     <table class="table table-boardered">
     <tr>
 		  <th><label class="control-label" for="email">이메일</label></th>

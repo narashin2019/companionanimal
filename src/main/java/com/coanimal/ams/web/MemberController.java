@@ -60,7 +60,7 @@ public class MemberController {
     
     System.out.println("멤버아이디포토 =" + member.getIdPhoto()); // 입력화면에서 넘기는 것이 있으면 null아님 사진변경을 하지 않으면 null
    
-    // 그러나 null로 비교하지 말고 파일네임이나 파일 사이즈로 비교해야 한다. 
+    // 그러나 photo와 null로 비교하지 말고 파일네임이나 파일 사이즈로 비교해야 한다. 
     if (photo.getOriginalFilename() !=null && photo.getOriginalFilename() != "") {
       String dirPath = servletContext.getRealPath("/upload/member");
       String filename = UUID.randomUUID().toString();

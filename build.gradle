@@ -105,5 +105,16 @@ compile group: 'javax.inject', name: 'javax.inject', version: '1'
 
   // Thumnailator
   implementation 'net.coobird:thumbnailator:0.4.11'
+
+  // https://mvnrepository.com/artifact/org.springframework.security/spring-security-web
+  compile group: 'org.springframework.security', name: 'spring-security-web', version: '5.3.6.RELEASE'
+
+  // https://mvnrepository.com/artifact/org.springframework.security/spring-security-config
+  compile group: 'org.springframework.security', name: 'spring-security-config', version: '5.3.6.RELEASE'
+
+  // https://mvnrepository.com/artifact/org.springframework.security/spring-security-core
+  compile group: 'org.springframework.security', name: 'spring-security-core', version: '5.3.6.RELEASE'
+
+
 }
 

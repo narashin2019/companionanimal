@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.coanimal.ams.domain.Member;
 import com.coanimal.ams.service.MemberService;
 import net.coobird.thumbnailator.Thumbnails;
@@ -26,7 +28,6 @@ public class MemberController {
   
   static Logger logger = LogManager.getLogger(MemberController.class);
 
-  // 파일첨부할때 씀
   @Autowired
   ServletContext servletContext;
 
@@ -45,8 +46,20 @@ public class MemberController {
   // 회원가입 POST
   @RequestMapping(value = "/register", method = RequestMethod.POST)
   public String postRegister(Member member) throws Exception {
-      memberService.register(member);
-      return "redirect:../auth/login";
+      
+    int result = memberService.idChk(member);
+    try {
+      if(result==1) {
+        return "member/register";
+      } else if (result==0) {
+        memberService.register(member);
+      }
+      
+    } catch (Exception e) {
+      throw new RuntimeException();
+    }
+    
+    return "redirect:../auth/login";
   }
   
   // 회원정보 수정 GET
@@ -87,11 +100,68 @@ public class MemberController {
       
   }
   
+  // 회원 탈퇴 get
+  @RequestMapping(value="/memberDeleteForm", method = RequestMethod.GET)
+  public String memberDeleteView() throws Exception{
+      return "member/memberDeleteForm";
+  }
+  
+  // 회원 탈퇴 post
+  @RequestMapping(value="/memberDelete", method = RequestMethod.POST)
+  public String memberDelete(Member member, HttpSession session, RedirectAttributes rttr) throws Exception{
+      
+    System.out.println("내가 입력한 member password: " + member.getPassword());
+   
+    // 세션에 있는 member를 가져와 mbr변수에 넣어준다
+    Member mbr = (Member) session.getAttribute("loginUser");
+    System.out.println("세션 mbr password: " + mbr.getPassword());
+    
+    // 세션에있는 비밀번호
+    String sessionPass = mbr.getPassword();
+   
+    // vo로 들어오는 비밀번호
+    String voPass = member.getPassword();
+    
+    // 세션 비밀번호와 vo 비밀번호가 같지 않다면
+    if(!(sessionPass.equals(voPass))) {
+        rttr.addFlashAttribute("msg", false);
+        return "redirect:memberDeleteForm";
+    }
+    
+    memberService.memberDelete(member);
+    session.invalidate();
+    return "redirect:/";
+  }
+  
   // 회원정보 조회 (마이페이지) GET
   @GetMapping("/mypage")
   public String mypage() {
     return "member/mypage";
   }
   
+  // 패스워드 체크
+  @ResponseBody
+  @RequestMapping(value="/passChk", method = RequestMethod.POST)
+  public int passChk(Member member) throws Exception {
+      int result = memberService.passChk(member);
+      return result;
+  }
+  
+  // 이메일 중복 체크
+  @ResponseBody
+  @RequestMapping(value="/idChk", method = RequestMethod.POST)
+  public int idChk(Member member) throws Exception {
+     int result = memberService.idChk(member);
+     return result;
+  }
+  
+  
+  // 닉네임 중복 체크
+  @ResponseBody
+  @RequestMapping(value="/nameChk", method = RequestMethod.POST)
+  public int nameChk(Member member) throws Exception {
+     int result = memberService.idChk(member);
+     return result;
+  }
 }
 

@@ -25,7 +25,7 @@
       nickname
     ) values(
       #{email},
-      password(#{password}),
+      #{password},
       #{nickname}
     )
   </insert>
@@ -35,7 +35,7 @@
     UPDATE member 
     <set> 
       <if test="nickname != null and nickname != ''">nickname = #{nickname},</if>
-      <if test="password != null and password != ''">password = password(#{password}),</if>
+      <if test="password != null and password != ''">password = #{password},</if>
       <if test="idPhoto != null and idPhoto != ''">id_photo = #{idPhoto}</if>
     </set>
     WHERE email = #{email}
@@ -52,7 +52,7 @@
     from member
     where 
       email=#{email} 
-      and password=password(#{password})
+      and password=#{password}
   </select>
   
   <!-- 회원정보 조회 (마이페이지) -->
@@ -62,6 +62,32 @@
 	  WHERE email = #{email}
   </select>
   
+  <!-- 회원 탈퇴 -->
+  <delete id="memberDelete">
+    DELETE FROM member
+    WHERE email=#{email} 
+      and password=#{password}
+  </delete>
+  
+  <!-- 패스워드 체크 -->
+	<select id="passChk" resultType="int">
+	  SELECT COUNT(*) FROM member
+	  WHERE email = #{email}
+	    AND password = #{password}
+	</select>
+	
+	 <!-- 이메일 중복 체크 -->
+  <select id="idChk" resultType="int">
+    SELECT COUNT(*) FROM member
+    WHERE email = #{email}
+  </select>
+  
+   <!-- 닉네임 중복 체크 -->
+  <select id="nameChk" resultType="int">
+    SELECT COUNT(*) FROM member
+    WHERE nickname = #{nickname}
+  </select>
+
 </mapper>
 
 

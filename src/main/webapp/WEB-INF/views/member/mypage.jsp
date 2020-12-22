@@ -8,6 +8,9 @@
     $("#memberUpdateBtn").on("click", function(){
       location.href="../member/memberUpdateForm";
     })
+    $("#deleteBtn").on("click", function(){
+      location.href="../member/memberDeleteForm";
+    })
   })
 </script>
 
@@ -40,6 +43,7 @@
     </table>
 
     <button id="memberUpdateBtn" type="button">회원정보수정</button>
+     <button id="deleteBtn" type="button">탈퇴</button>
 
 
 </form>

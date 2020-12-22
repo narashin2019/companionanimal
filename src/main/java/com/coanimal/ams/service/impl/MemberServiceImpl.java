@@ -51,6 +51,33 @@ public class MemberServiceImpl implements MemberService {
   public Member userView(String email) throws Exception {
     return memberDao.userView(email);
   }
+
+  // 회원 탈퇴
+  @Override
+  public void memberDelete(Member member) throws Exception {
+    memberDao.memberDelete(member);
+  }
+  
+  //패스워드 체크
+  @Override
+  public int passChk(Member member) throws Exception {
+     int result = memberDao.passChk(member);
+     return result;
+  }
+
+  // 이메일 중복 체크
+  @Override
+  public int idChk(Member member) throws Exception {
+     int result = memberDao.idChk(member);
+     return result;
+  }
+  
+  // 닉네임 중복 체크
+  @Override
+  public int nameChk(Member member) throws Exception {
+     int result = memberDao.idChk(member);
+     return result;
+  }
   
 
 }

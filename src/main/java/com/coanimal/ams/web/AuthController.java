@@ -53,6 +53,7 @@ public class AuthController {
     response.addCookie(cookie);
 
     Member member = memberService.findByEmailAndPassword(email, password);
+    
     if (member != null) {
       session.setAttribute("loginUser", member);
       model.addAttribute("refreshUrl", "2;url=../../");

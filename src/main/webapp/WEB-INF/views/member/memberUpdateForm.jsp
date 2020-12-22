@@ -4,32 +4,47 @@
 
 
 
-
-<script type="text/javascript">
-$(document).ready(function(){
-  // 취소
-  $(".cancel").on("click", function(){
-    location.href = "mypage";
-    console.log("취소버튼눌러서 마이페이지로")
-  })
-
-  $("#submit").on("click", function(){
-	  console.log(" submit버튼 클릭함")
-	  if($("#password").val()==""){
-      alert("비밀번호를 입력해주세요.");
-      $("#password").focus();
-      console.log("비밀번호 없다고 걸러냄")
-      return false;
-    }
-    if($("#nickname").val()==""){
-      alert("닉네임을 입력해주세요.");
-      $("#nickname").focus();
-      console.log("닉네임 없다고 걸러냄")
-      return false;
-    }
-  });
-})
-</script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      // 취소
+      $(".cancel").on("click", function(){
+        location.href = "mypage";
+      })
+    
+      $("#submit").on("click", function(){
+        if($("#password").val()==""){
+          alert("비밀번호를 입력해주세요.");
+          $("#password").focus();
+          return false;
+        }
+        if($("#nickname").val()==""){
+          alert("성명을 입력해주세요.");
+          $("#nickname").focus();
+          return false;
+        }
+        $.ajax({
+          url : "/companionanimal/app/member/passChk",
+          type : "POST",
+          dateType : "json",
+          data : $("#memberUpdateForm").serializeArray(),
+          success: function(data){
+            
+            if(data==true){
+              if(confirm("회원수정하시겠습니까?")){
+            	  console.log("수정하겠다 submit작동전");
+                $("#memberUpdateForm").submit();
+              }
+              
+            }else{
+              alert("패스워드가 틀렸습니다.");
+              return;
+              
+            }
+          }
+        })
+      });
+    })
+  </script>
 
 <div class="container">
 <div class="row">
@@ -38,7 +53,7 @@ $(document).ready(function(){
 </div>
 <div class="col-sm-6">
 <h2>회원정보수정</h2>
-  <form name='memberUpdateForm' action='memberUpdate' method='post' enctype="multipart/form-data">
+  <form name='memberUpdateForm' id='memberUpdateForm' action='memberUpdate' method='post' enctype="multipart/form-data">
     <table class="table table-boardered">
     <tr>
 		  <th><label class="control-label" for="email">이메일</label></th>
@@ -95,12 +110,12 @@ $("#photo").change(function(){
 });
 </script>
 </div>
+</form>
     
     <div>
-       <button class="submit btn btn-success" type="submit" id="submit">회원정보수정</button>
+       <button class="submit btn btn-success" type="button" id="submit">회원정보수정</button>
        <button class="cancel btn btn-danger" type="button">취소</button>
     </div>
-  </form>
 </div>
 </div>
 </div>

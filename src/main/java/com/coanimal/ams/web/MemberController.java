@@ -2,11 +2,13 @@ package com.coanimal.ams.web;
 
 import java.io.File;
 import java.util.UUID;
+import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +36,9 @@ public class MemberController {
   @Autowired
   MemberService memberService;
   
+  @Inject
+  BCryptPasswordEncoder pwdEncoder;
+  
   public MemberController() {
     logger.debug("MemberController 생성됨!");
   }
@@ -49,9 +54,12 @@ public class MemberController {
       
     int result = memberService.idChk(member);
     try {
-      if(result==1) {
+      if(result == 1) {
         return "member/register";
       } else if (result==0) {
+        String inputPass = member.getPassword();
+        String pwd = pwdEncoder.encode(inputPass);
+        member.setPassword(pwd);
         memberService.register(member);
       }
       
@@ -110,23 +118,21 @@ public class MemberController {
   @RequestMapping(value="/memberDelete", method = RequestMethod.POST)
   public String memberDelete(Member member, HttpSession session, RedirectAttributes rttr) throws Exception{
       
-    System.out.println("내가 입력한 member password: " + member.getPassword());
    
-    // 세션에 있는 member를 가져와 mbr변수에 넣어준다
-    Member mbr = (Member) session.getAttribute("loginUser");
-    System.out.println("세션 mbr password: " + mbr.getPassword());
-    
-    // 세션에있는 비밀번호
-    String sessionPass = mbr.getPassword();
-   
-    // vo로 들어오는 비밀번호
-    String voPass = member.getPassword();
-    
-    // 세션 비밀번호와 vo 비밀번호가 같지 않다면
-    if(!(sessionPass.equals(voPass))) {
-        rttr.addFlashAttribute("msg", false);
-        return "redirect:memberDeleteForm";
-    }
+//    // 세션에 있는 member를 가져와 mbr변수에 넣어준다
+//    Member mbr = (Member) session.getAttribute("loginUser");
+//    
+//    // 세션에있는 비밀번호
+//    String sessionPass = mbr.getPassword();
+//   
+//    // vo로 들어오는 비밀번호
+//    String voPass = member.getPassword();
+//    
+//    // 세션 비밀번호와 vo 비밀번호가 같지 않다면
+//    if(!(sessionPass.equals(voPass))) {
+//        rttr.addFlashAttribute("msg", false);
+//        return "redirect:memberDeleteForm";
+//    }
     
     memberService.memberDelete(member);
     session.invalidate();
@@ -142,9 +148,14 @@ public class MemberController {
   // 패스워드 체크
   @ResponseBody
   @RequestMapping(value="/passChk", method = RequestMethod.POST)
-  public int passChk(Member member) throws Exception {
-      int result = memberService.passChk(member);
-      return result;
+  public boolean passChk(Member member) throws Exception {
+    String email = member.getEmail();
+    String password = member.getPassword();
+     
+    Member login = memberService.findByEmailAndPassword(email, password);
+    boolean pwdChk = pwdEncoder.matches(member.getPassword(), login.getPassword());  
+  
+    return pwdChk;
   }
   
   // 이메일 중복 체크

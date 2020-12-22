@@ -1,11 +1,13 @@
 package com.coanimal.ams.web;
 
+import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +26,10 @@ public class AuthController {
 
   @Autowired
   MemberService memberService;
+  
+  @Inject
+  BCryptPasswordEncoder pwdEncoder;
+  
   
   public AuthController() {
     logger.debug("AuthController 생성됨!");
@@ -52,9 +58,14 @@ public class AuthController {
     }
     response.addCookie(cookie);
 
-    Member member = memberService.findByEmailAndPassword(email, password);
+    session.getAttribute("member");
     
-    if (member != null) {
+    Member member = memberService.findByEmailAndPassword(email, password);
+   
+    boolean pwdMatch = pwdEncoder.matches(password, member.getPassword());
+    
+    
+    if (member != null && pwdMatch == true) {
       session.setAttribute("loginUser", member);
       model.addAttribute("refreshUrl", "2;url=../../");
     } else {

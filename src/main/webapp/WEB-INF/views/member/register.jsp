@@ -26,6 +26,16 @@ $(document).ready(function(){
           $("#password2").focus();
           return false;
       }
+      if($("#password").val() != $("#password2").val()){
+          alert("비밀번호가 서로 다릅니다. 비밀번호를 확인해 주세요."); 
+          $("#password").focus();
+          return false; 
+      }
+      if ($("#password").val().length < 8) {
+          alert("비밀번호는 8자 이상으로 설정해야 합니다.");
+          $("#password").val("").focus();
+          return false;
+      }
       if($("#nickname").val()==""){
         alert("닉네임을 입력해주세요.");
         $("#nickname").focus();
@@ -97,7 +107,7 @@ $(document).ready(function(){
      </tr>
      <tr>
        <th><label class="control-label" for="password">비밀번호 확인</label></th>
-       <td><input class="form-control"  type="password2 id="password2" name="password2" placeholder="비밀번호를 확인하세요"></td>        
+       <td><input class="form-control"  type="password" id="password2" name="password2" placeholder="비밀번호를 확인하세요"></td>        
      </tr>
      <tr>
      <th><label class="control-label" for="nickname">닉네임</label></th>

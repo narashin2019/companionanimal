@@ -75,7 +75,7 @@ public class MemberServiceImpl implements MemberService {
   // 닉네임 중복 체크
   @Override
   public int nameChk(Member member) throws Exception {
-     int result = memberDao.idChk(member);
+     int result = memberDao.nameChk(member);
      return result;
   }
   

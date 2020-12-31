@@ -7,7 +7,7 @@
 $(document).ready(function(){
     // 취소
     $(".cancel").on("click", function(){
-      location.href = "../auth/login";
+      location.href = "../../";
     })
     
     $("#submit").on("click", function(){
@@ -45,7 +45,29 @@ $(document).ready(function(){
     });
   })
   
-  function fn_idChk(){
+  
+  function fn_nameChk(){
+    $.ajax({
+      url : "/companionanimal/app/member/nameChk",
+      type : "post",
+      dataType : "json",
+      data : {"nickname" : $("#nickname").val()},
+      success : function(data){
+        if(data == 1){
+          alert("중복된 닉네임입니다.");
+          console.log("중복");
+        }else if(data == 0){
+          $("#nameChk").attr("value", "Y");
+          alert("사용가능한 닉네임입니다.");
+          console.log("사용가능함");
+        }else {
+          alert("닉네임을 입력해주세요.");
+        }
+      }
+    })
+  }
+  
+function fn_idChk(){
     $.ajax({
       url : "/companionanimal/app/member/idChk",
       type : "post",
@@ -58,31 +80,12 @@ $(document).ready(function(){
           $("#idChk").attr("value", "Y");
           alert("사용가능한 이메일입니다.");
         }else {
-        	alert("이메일을 입력해주세요.");
+          alert("이메일을 입력해주세요.");
         }
       }
     })
   }
-  
-  function fn_nameChk(){
-    $.ajax({
-      url : "/companionanimal/app/member/nameChk",
-      type : "post",
-      dataType : "json",
-      data : {"nickname" : $("#nickname").val()},
-      success : function(data){
-    	  
-        if(data == 1){
-          alert("중복된 닉네임입니다.");
-        }else if(data == 0){
-          $("#idChk").attr("value", "Y");
-          alert("사용가능한 닉네임입니다.");
-        } else {
-        	alert("닉네임을 입력해 주세요.");
-        }
-      }
-    })
-  }
+
 </script>
 
 
@@ -112,7 +115,7 @@ $(document).ready(function(){
      <tr>
      <th><label class="control-label" for="nickname">닉네임</label></th>
        <td><input class="form-control"  type="text" id="nickname" name="nickname" placeholder="닉네임을 입력하세요">
-       <button class="idChk" type="button" id="nameChk" onclick="fn_nameChk();" value="N">중복확인</button> </td>        
+       <button class="nameChk" type="button" id="nameChk" onclick="fn_nameChk();" value="N">중복확인</button> </td>        
      </tr>
     </table>
   

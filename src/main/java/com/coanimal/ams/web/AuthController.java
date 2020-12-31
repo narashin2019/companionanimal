@@ -68,6 +68,7 @@ public class AuthController {
     if (member != null && pwdMatch == true) {
       session.setAttribute("loginUser", member);
       model.addAttribute("refreshUrl", "2;url=../../");
+   
     } else {
       session.invalidate();
       model.addAttribute("refreshUrl", "2;url=login");

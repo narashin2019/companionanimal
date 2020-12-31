@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -50,25 +51,36 @@ public class MemberController {
 
   // 회원가입 POST
   @RequestMapping(value = "/register", method = RequestMethod.POST)
-  public String postRegister(Member member) throws Exception {
+  public String postRegister(Member member, Model model) throws Exception {
       
     int result = memberService.idChk(member);
+    
+    int result2 = memberService.nameChk(member);
+    
     try {
-      if(result == 1) {
-        return "member/register";
-      } else if (result==0) {
+      if(result == 1 || result2 == 1) {
+    
+        model.addAttribute("result", "fail");
+        model.addAttribute("refreshUrl", "2;url=register");
+        
+      } else if (result==0 && result2 == 0) {
         String inputPass = member.getPassword();
         String pwd = pwdEncoder.encode(inputPass);
         member.setPassword(pwd);
+        
         memberService.register(member);
+        
+        model.addAttribute("result", "ok");
+        model.addAttribute("refreshUrl", "2;url=../auth/login");
       }
       
     } catch (Exception e) {
       throw new RuntimeException();
     }
     
-    return "redirect:../auth/login";
+    return "member/registerResult";
   }
+
   
   // 회원정보 수정 GET
   @RequestMapping(value="/memberUpdateForm", method = RequestMethod.GET)
@@ -166,12 +178,11 @@ public class MemberController {
      return result;
   }
   
-  
   // 닉네임 중복 체크
   @ResponseBody
   @RequestMapping(value="/nameChk", method = RequestMethod.POST)
   public int nameChk(Member member) throws Exception {
-     int result = memberService.idChk(member);
+     int result = memberService.nameChk(member);
      return result;
   }
 }

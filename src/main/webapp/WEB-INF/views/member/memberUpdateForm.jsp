@@ -18,7 +18,7 @@
           return false;
         }
         if($("#nickname").val()==""){
-          alert("성명을 입력해주세요.");
+          alert("닉네임을 입력해주세요.");
           $("#nickname").focus();
           return false;
         }
@@ -44,6 +44,32 @@
         })
       });
     })
+  
+  $(function() {
+    //입력값 검증 정규표현식
+    const getPwCheck= RegExp(/([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])/);
+    
+    //패스워드 입력값 검증.
+    $('#password').on('keyup', function() {
+       if(!getPwCheck.test($("#password").val()) || $("#password").val().length < 8){
+            $('#pwChk').html('<b style="font-size:14px;color:red;">특수문자 포함 8자이상 입력해주세요.</b>');
+        } else {
+          $('#pwChk').html('');
+        }
+        
+    });
+    
+    //패스워드 확인란 입력값 검증.
+    $('#password2').on('keyup', function() {
+        //비밀번호 확인란 공백 확인
+       if($("#password").val() != $("#password2").val()){
+            $('#pwChk2').html('<b style="font-size:14px;color:red;">비밀번호가 일치하지 않습니다.</b>');
+        } else {
+          $('#pwChk2').html('');
+        }
+        
+    });
+  });
   </script>
 
 <div class="container">
@@ -61,14 +87,18 @@
     </tr>      
     <tr>
 		     <th><label class="control-label" for="password">비밀번호</label></th>
-		     <td><input class="form-control"  type="password" id="password" name="password"></td>        
+		     <td>
+		     <input class="form-control"  type="password" id="password" name="password" placeholder="비밀번호를 입력하세요">
+		     <span id="pwChk"></span>
+		     </td>        
 		</tr>
-		   <!-- 비밀번호 확인
 		<tr>
 		  <th><label class="control-label" for="password">비밀번호</label></th>
-		  <td><input class="form-control"  type="password" id="password" name="password" placeholder="비밀번호를 확인하세요"></td>        
+		  <td>
+		  <input class="form-control"  type="password" id="password2" name="password2" placeholder="비밀번호를 확인하세요">
+		  <span id="pwChk2"></span>
+		  </td>        
 		</tr>
-		-->       
 		<tr>
 		  <th><label class="control-label" for="nickname">닉네임</label></th>
 		  <td><input class="form-control"  type="text" id="nickname" name="nickname" value="${loginUser.nickname}"></td>        

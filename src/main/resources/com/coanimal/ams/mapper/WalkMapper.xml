@@ -64,6 +64,11 @@ LEFT JOIN member AS m ON w.member_no=m.member_no
   
   <!-- 첨부파일 관련 코드 추가 -->
  <insert id="insert" parameterType="Walk" useGeneratedKeys="true" keyProperty="walkNo">
+ <selectKey keyProperty="walkNo" resultType="int" order="BEFORE">
+ SELECT MAX(walk_no)+1 FROM walk_board 
+      </selectKey>
+      
+      
     insert into walk_board(
     walk_category,
       title,

@@ -1,18 +1,10 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<html>
-  <head>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <title>산책 게시판</title>
-  </head>
-
-  <body>
-  <section id="container">
+<div class="container">
   
   <table border='1'>
   <thead>
@@ -46,7 +38,4 @@
   </form>
   </div>
 
-  </section>
-  </body>
-  </html>
-
+  </div>

@@ -3,7 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<!-- 20201215 -->
 <mapper namespace="com.coanimal.ams.dao.MemberDao">
 
   <resultMap type="Member" id="MemberMap">
@@ -51,7 +50,7 @@
       id_photo
     from member
     where 
-      email=#{email} 
+      email=#{email} and authstatus = 1
       <!-- and password=#{password}  -->
   </select>
   
@@ -87,6 +86,18 @@
     SELECT COUNT(*) FROM member
     WHERE nickname = #{nickname}
   </select>
+  
+  <!-- 생성된 메일 인증키 업데이트 -->
+  <update id="createAuthkey">
+    update member set authkey = #{param2} where email = #{param1}
+  </update>
+  
+  
+  <!-- authstatus 컬럼을  0 에서 1로 업데이트-->
+  <update id="updateAuthstatus">
+      update member set authstatus = 1 where email = #{param1}
+  </update>
+  
 
 </mapper>
 

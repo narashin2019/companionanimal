@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.UUID;
 import javax.inject.Inject;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,8 +23,6 @@ import com.coanimal.ams.domain.Member;
 import com.coanimal.ams.service.MemberService;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.name.Rename;
-
-//20201215
 
 @Controller
 @RequestMapping("/member")
@@ -51,7 +50,7 @@ public class MemberController {
 
   // 회원가입 POST
   @RequestMapping(value = "/register", method = RequestMethod.POST)
-  public String postRegister(Member member, Model model) throws Exception {
+  public String postRegister(Member member, Model model, HttpServletRequest request) throws Exception {
       
     int result = memberService.idChk(member);
     
@@ -185,5 +184,15 @@ public class MemberController {
      int result = memberService.nameChk(member);
      return result;
   }
+  
+  // 이메일 인증
+  @RequestMapping(value = "/emailConfirm", method = RequestMethod.GET)
+  public String emailConfirm(String email, Model model) throws Exception {
+          memberService.updateAuthstatus(email);
+          model.addAttribute("email", email);
+
+          return "member/emailConfirm"; // emailConfirm.jsp
+  }
+  
 }
 

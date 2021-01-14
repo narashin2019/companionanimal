@@ -3,7 +3,6 @@ package com.coanimal.ams.dao;
 import java.util.Map;
 import com.coanimal.ams.domain.Member;
 
-//20201215
 public interface MemberDao {
 
   // 회원가입
@@ -29,6 +28,12 @@ public interface MemberDao {
 
   // 닉네임 중복체크
   public int nameChk(Member member) throws Exception;
+  
+  // 디비에 authkey저장
+  public int createAuthkey(String email, String authkey) throws Exception;
+ 
+  // 이메일 인증 후 authstatus 1로  변경
+  public void updateAuthstatus(String email) throws Exception;
 }
 
 

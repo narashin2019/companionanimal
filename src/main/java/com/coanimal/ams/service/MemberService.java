@@ -2,7 +2,6 @@ package com.coanimal.ams.service;
 
 import com.coanimal.ams.domain.Member;
 
-//20201215
 public interface MemberService {
 
   // 회원가입
@@ -28,4 +27,7 @@ public interface MemberService {
   
   // 닉네임 중복 체크
   public int nameChk(Member member) throws Exception;
+
+  // authstatus 1로 변경
+  public void updateAuthstatus(String email) throws Exception;
 }

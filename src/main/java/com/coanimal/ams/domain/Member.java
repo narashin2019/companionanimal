@@ -3,7 +3,6 @@ package com.coanimal.ams.domain;
 import java.io.Serializable;
 import java.sql.Date;
 
-// 20201215
 public class Member implements Serializable {
 
   private static final long serialVersionUID = 20201207L;
